@@ -26,11 +26,15 @@
         {% endif %}
       {% endfor %}
 
-      <a class="sidebar-nav-item" href="{{ site.github.repo }}/archive/v{{ site.version }}.zip">Download</a>
-      <a class="sidebar-nav-item" href="{{ site.github.repo }}">GitHub project</a>
-      <span class="sidebar-nav-item">Currently v{{ site.version }}</span>
-    </nav>
 
+      <a class="sidebar-nav-item" href="{{ site.github.repo }}" style="font-size:0.9em" id="github-badge"> </a>
+    </nav>
+    <script>
+      JSONP( 'https://api.github.com/users/buremba?callback=?', function( response ) {
+        console.log(response.data);
+        document.getElementById("github-badge").innerText = response.data.public_repos+" repos in GitHub";
+      });
+    </script>
     <p>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>
   </div>
 </div>
