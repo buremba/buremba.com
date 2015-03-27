@@ -9,7 +9,7 @@ body {
     padding: 0;
 }
 html {
-    font: 14px/1.6 'Open Sans', Helvetica, sans-serif;
+    font: 14px/1.6 "Lucida Grande",verdana,sans-serif;
 }
 @media (min-width: 38em) {
     html {
@@ -38,6 +38,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
     line-height: 1.25;
     color: #313131;
+    text-rendering: optimizeLegibility;
 }
 h1 {
     font-size: 2rem;
@@ -181,9 +182,10 @@ tbody tr:nth-child(odd) td,
 tbody tr:nth-child(odd) th {
     background-color: #f9f9f9;
 }
-.container.sidebar-sticky {
-    font-size: 1.25rem;
+.lead {
+    font-size: 2.25rem;
     font-weight: 300;
+    margin: 0;
 }
 .message {
     margin-bottom: 1rem;
