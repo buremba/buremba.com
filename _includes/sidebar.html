@@ -1,11 +1,6 @@
 <div class="sidebar">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
-      <h1>
-        <a href="{{ site.baseurl }}">
-          {{ site.title }}
-        </a>
-      </h1>
       <p class="lead">{{ site.description }}</p>
     </div>
 
@@ -31,7 +26,6 @@
     </nav>
     <script>
       JSONP( 'https://api.github.com/users/buremba?callback=?', function( response ) {
-        console.log(response.data);
         document.getElementById("github-badge").innerText = response.data.public_repos+" repos in GitHub";
       });
     </script>
