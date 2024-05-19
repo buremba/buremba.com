@@ -71,3 +71,4 @@ yarn-error.log
 public/sitemap.xml
 formspree.json
 .idea
+.vercel
