@@ -23,16 +23,17 @@ export async function getProjects() {
         },
       ],
     })
+
     return results.map(
       result =>
         ({
           id: result.id,
-          title: helper.asTitle(result.properties.Title).title[0].plain_text,
+          title: helper.asTitle(result.properties.Title).title?.[0].plain_text,
           description: helper.asRichText(result.properties.Description)
-            .rich_text[0].plain_text,
+            .rich_text?.[0]?.plain_text,
           link: helper.asUrl(result.properties.Link).url,
           type: helper.asSelect(result.properties.Type).select?.name,
-          year: helper.asRichText(result.properties.Year).rich_text[0]
+          year: helper.asRichText(result.properties.Year).rich_text?.[0]
             .plain_text,
           tags: helper
             .asMultiSelect(result.properties.Tags)

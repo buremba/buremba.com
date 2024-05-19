@@ -30,34 +30,6 @@ export default async function About() {
             useful apps and contribute to open source projects while working a
             full-time job.
           </mdx.p>
-          <mdx.h3>Why make this website?</mdx.h3>
-          <mdx.p>
-            I made this website to learn what actually goes into web
-            development. From planning, design, development, launch, and
-            maintenance. For sure there are other things that I have yet to
-            encounter, and I’m ready to learn them. This also serves a
-            motivation for me to continue making projects because now I finally
-            have a place to showcase them.
-          </mdx.p>
-          <mdx.h3>Why write a blog?</mdx.h3>
-          <mdx.p>
-            My <mdx.a href="/blog/welcome">first blog post</mdx.a> explained it.
-            I'd be happy if you read it 😀
-          </mdx.p>
-          <mdx.h3>What else?</mdx.h3>
-          <mdx.p>
-            When I’m not programming, I endlessly browse Reddit (
-            <mdx.a href="https://www.reddit.com/r/gamedev/">r/gamedev</mdx.a>,{' '}
-            <mdx.a href="https://www.reddit.com/r/formula1/">r/formula1</mdx.a>,{' '}
-            <mdx.a href="https://www.reddit.com/r/animalsbeingderps/">
-              r/animalsbeingderps
-            </mdx.a>
-            ). I also love watching{' '}
-            <mdx.a href="https://letterboxd.com/buremba/">movies</mdx.a> and
-            listening to{' '}
-            <mdx.a href="https://www.last.fm/user/Buremba">music</mdx.a><mdx.a href="https://open.spotify.com/user/burakemre">(2)</mdx.a>.
-            You can catch me out running or cycling around London.
-          </mdx.p>
         </article>
         <h3 className="mb-4 text-2xl font-bold leading-tight mt-14 text-accent">
           Recents
