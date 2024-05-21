@@ -8,17 +8,13 @@ import { components } from '../../../components/mdxComponents'
 import { QuickNav } from '../../../components/quickNav'
 import { getAllFrontMatters, getMdxBySlug } from '../../../lib/mdx'
 
-async function generateStaticParams() {
+export async function generateStaticParams() {
   const posts = await getAllFrontMatters()
-  return {
-    paths: posts.map(post => ({
-      params: {
-        slug: post.slug,
-      },
-    })),
-    fallback: false,
-  }
+  return posts.map(post => ({
+    slug: post.slug,
+  }))
 }
+
 export async function generateMetadata({ params }): Promise<Metadata> {
   const { frontmatter } = await getMdxBySlug(params.slug)
 
@@ -36,6 +32,9 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 }
 
 export default async function BlogPost({ params }) {
+  debugger
+  debugger
+  console.log(params)
   const { code, frontmatter } = await getMdxBySlug(params.slug)
   const Component = getMDXComponent(code)
 

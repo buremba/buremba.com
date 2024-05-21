@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 }
 
 export default async function Blog() {
-  const posts = await getAllFrontMatters()
   return (
     <Fragment>
       <span className="inline-flex p-3 rounded-full bg-back-subtle">

@@ -72,3 +72,4 @@ public/sitemap.xml
 formspree.json
 .idea
 .vercel
+out/
