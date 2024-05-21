@@ -24,11 +24,9 @@ export default async function About() {
         </h1>
         <article className="max-w-2xl min-w-0 text-base lg:text-lg text-fore-subtle">
           <mdx.p>
-            I'm Burak, I work full-time as a game programmer at&nbsp;
-            <mdx.a href="https://secret6.com">Secret 6, Inc</mdx.a>. In my free
-            time, I study front-end development with React. My goal is to write
-            useful apps and contribute to open source projects while working a
-            full-time job.
+            I'm Burak, I work at <mdx.a href="https://liveramp.com">LiveRamp</mdx.a> as a Sr. Staff Software Engineer&nbsp;
+            I'm a maker, entrepreneur, and software engineer. I founded <mdx.a href="https://rakam.io">Rakam</mdx.a>, acquirehired by LiveRamp in 2021.
+            I do open-source work, write, snowboard, scuba dive, and run to clear my mind.
           </mdx.p>
         </article>
         <h3 className="mb-4 text-2xl font-bold leading-tight mt-14 text-accent">

@@ -32,9 +32,6 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 }
 
 export default async function BlogPost({ params }) {
-  debugger
-  debugger
-  console.log(params)
   const { code, frontmatter } = await getMdxBySlug(params.slug)
   const Component = getMDXComponent(code)
 

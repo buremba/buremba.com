@@ -24,11 +24,12 @@ export async function getProjects() {
       ],
     })
 
+    console.log(results)
     return results.map(
       result =>
         ({
           id: result.id,
-          title: helper.asTitle(result.properties.Title).title?.[0].plain_text,
+          title: helper.asRichText(result.properties.Title)?.rich_text?.[0]?.plain_text,
           description: helper.asRichText(result.properties.Description)
             .rich_text?.[0]?.plain_text,
           link: helper.asUrl(result.properties.Link).url,

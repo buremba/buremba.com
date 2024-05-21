@@ -40,7 +40,7 @@ export default async function Page() {
         </span>
       </div>
       <PostList />
-      <div className="flex items-center mt-24 mb-8 space-x-3">
+      {/* <div className="flex items-center mt-24 mb-8 space-x-3">
         <span className="p-3 rounded-full bg-back-subtle">
           <Project24 />
         </span>
@@ -48,7 +48,7 @@ export default async function Page() {
           PROJECTS
         </span>
       </div>
-      <ProjectList bOpenSourceOnly={true} />
+      <ProjectList bOpenSourceOnly={true} /> */}
       <Contact />
     </div>
   )
