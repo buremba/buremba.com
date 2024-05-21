@@ -27,13 +27,13 @@ export const metadata: Metadata = {
     description: 'Entrepreneur, maker, software developer, data engineer',
     url: 'https://buremba.com',
     siteName: 'Burak',
-    images: [
-      {
-        url: 'https://buremba.com/static/og/default.png',
-        width: 1280,
-        height: 675,
-      },
-    ],
+    // images: [
+    //   {
+    //     url: 'https://buremba.com/static/og/default.png',
+    //     width: 1280,
+    //     height: 675,
+    //   },
+    // ],
     locale: 'en-US',
     type: 'website',
   },
