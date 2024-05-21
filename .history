@@ -1,0 +1,8 @@
+#V2
+select count(distinct "URL") from 'hits.parquet';
+create database test;
+show databases;
+\\d
+select * from 'data.csv';
+CREATE EXTERNAL TABLE hits\nSTORED AS PARQUET\nLOCATION 'https://datasets.clickhouse.com/hits_compatible/athena_partitioned/hits_1.parquet';
+select count(*) from hits;
