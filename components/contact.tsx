@@ -10,7 +10,7 @@ export function Contact() {
       <div className="container max-w-screen-xl p-8 mx-auto">
         <p className="px-4 text-center text-fore-secondary">
           You can reach me on {' '}
-          <ExtLink link="https://github.com/buremba">Linkedin</ExtLink>,{' '}
+          <ExtLink link="https://www.linkedin.com/in/burak-emre-kabakc%C4%B1-15b2bb33/">Linkedin</ExtLink>,{' '}
           <ExtLink link="https://twitter.com/bu7emba">Twitter</ExtLink>,
           <br /><br />  
           or/and find me coding on {' '}
