@@ -24,7 +24,6 @@ export async function getProjects() {
       ],
     })
 
-    console.log(results)
     return results.map(
       result =>
         ({
