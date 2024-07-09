@@ -9,42 +9,44 @@ toc: false
 
 # Comparing Apache DataFusion and DuckDB
 
-DuckDB and Apache DataFusion are two shining technologies the data community is excited about. Both offer powerful data processing capabilities, but they differ in their architecture, community support, and use cases. This article compares DuckDB and Apache DataFusion to help you choose the right tool for your data processing needs.
+DuckDB and Apache DataFusion are two shining technologies the data community is excited about. Both offer powerful data processing capabilities but differ in their architecture, community support, and use cases. This article compares DuckDB and Apache DataFusion to help you choose the right tool for your data processing needs.
 
 ## Community
 
 **DuckDB** is developed by the [DuckDB Foundation](https://duckdb.org/foundation/), ensuring focused development and strategic direction.
-One of the main supporters [MotherDuck](https://motherduck.com/) offers cloud version that supports [hybrid processing](https://motherduck.com/blog/announcing-motherduck-duckdb-in-the-cloud/).
+One of the main supporters [MotherDuck](https://motherduck.com/) offers a cloud version that supports [hybrid processing](https://motherduck.com/blog/announcing-motherduck-duckdb-in-the-cloud/).
 Mainly [Analytics](https://mode.com/blog/how-we-switched-in-memory-data-engine-to-duck-db-to-boost-visual-data-exploration-speed) and [ETL](https://www.fivetran.com/blog/how-fast-is-duckdb-really) companies utilize DuckDB, showcasing its reliability and performance.
-DuckDB’s commercial partnerships and foundation approach ensure ongoing innovation and support, the companies pay to be part of the membership club and the foundation makes sure the project is well funded and aligned with both community and commercial products.
+DuckDB’s commercial partnerships and foundation approach ensure ongoing innovation and support, the companies pay to be part of the membership club and the foundation makes sure the project is well-funded and aligned with both community and commercial products.
 
-**Apache DataFusion** benefits from the broad and diverse community of the [Apache Software Foundation](https://www.apache.org/). Contributions from various organizations and individuals drive continuous improvement and innovation. At the time being, there are [11 PMC members](https://people.apache.org/phonebook.html?pmc=datafusion) and they include NVIDIA, Apple. And startups like Posit, Synnada,
+**Apache DataFusion** benefits from the broad and diverse community of the [Apache Software Foundation](https://www.apache.org/). Contributions from various organizations and individuals drive continuous improvement and innovation. At the time being, there are more than  [10 PMC members](https://people.apache.org/phonebook.html?pmc=datafusion) and they include NVIDIA and Apple. And startups like Posit, Synnada, and Influxdb.
 
-<a href="https://next.ossinsight.io/widgets/official/analyze-repo-stars-history?repo_id=358917318" target="_blank" align="center">
-    <img alt="Star History of duckdb/duckdb" src="https://next.ossinsight.io/widgets/official/analyze-repo-stars-history/thumbnail.png?repo_id=358917318&image_size=auto&color_scheme=light" width="721" height="auto" />
+<a href="https://next.ossinsight.io/widgets/official/analyze-repo-stars-history?repo_id=358917318&vs_repo_id=138754790" target="_blank" align="center"> 
+  <img alt="apache/datafusion vs duckdb/duckdb | Star History" src="https://next.ossinsight.io/widgets/official/analyze-repo-stars-history/thumbnail.png?repo_id=358917318&vs_repo_id=138754790&image_size=auto&color_scheme=light" height="auto" />  
 </a>
 
-<a href="https://next.ossinsight.io/widgets/official/analyze-repo-stars-history?repo_id=358917318" target="_blank" align="center">
-    <img alt="Star History of duckdb/duckdb" src="https://next.ossinsight.io/widgets/official/analyze-repo-stars-history/thumbnail.png?repo_id=358917318&image_size=auto&color_scheme=light" width="721" height="auto" />
-</a>
-
-<div class="grid grid-cols-2 gap-4">
-  <div class="p-0">
-
-  </div>
-  <div class="p-0">
-
-  </div>
-</div>
 
 
-## Architecture
+
+
+## Database Architecture
 
 **DuckDB** offers a streamlined architecture for single-node analytics, optimized for read-heavy scenarios with its unique columnar storage format. Written in C++, it ensures high performance and efficiency. DuckDB has zero-copy integration with Apache Arrow, enhancing interoperability. More details on DuckDB's Arrow integration can be found [here](https://duckdb.org/2021/12/03/duck-arrow.html). DuckDB’s advanced SQL features, including [macros](https://duckdb.org/2024/03/01/sql-gymnastics.html) and [GROUP BY ALL](https://duckdb.org/2022/05/04/friendlier-sql.html), position it as a leader in SQL innovation. However, DuckDB's main limitation is its lack of support for scaling across multiple nodes, although [MotherDuck](https://motherduck.com/blog/) aims to address this with a hybrid architecture.
 
 **Apache DataFusion** features a modular architecture supporting distributed data processing, making it suitable for scalable environments.
-Developed in Rust, it provides safety and performance benefits.
+Developed in Rust, it provides safety and performance benefits and it's stateless, unlike Duckdb which has its database format.
 DataFusion excels in streaming and distributed scaling, particularly for machine learning applications, with native support for reading from Kafka.
+
+
+Long term, I believe Duckdb will try to endorse its database format and focus on SQL interface, making it win over Parquet and Arrow while keeping the compatibility. 
+DataFusion on the other hand, seems to focus more on making stream processing hassle-free for big data, using Rust and SQL compatibility.
+
+ <iframe
+            id="trends-widget-2"
+            src="https://trends.google.com/trends/embed/explore/TIMESERIES?req=%7B%22comparisonItem%22%3A%5B%7B%22keyword%22%3A%22%2Fg%2F11swmy6yh8%22%2C%22geo%22%3A%22%22%2C%22time%22%3A%22today%205-y%22%7D%2C%7B%22keyword%22%3A%22%2Fg%2F11hzcqhmq1%22%2C%22geo%22%3A%22%22%2C%22time%22%3A%22today%205-y%22%7D%2C%7B%22keyword%22%3A%22%2Fg%2F11c54dt85y%22%2C%22geo%22%3A%22%22%2C%22time%22%3A%22today%205-y%22%7D%5D%2C%22category%22%3A0%2C%22property%22%3A%22%22%7D&tz=-60&forceMobileMode=false&isPreviewMode=true&eq=date%3Dtoday%25205-y%26q%3D%252Fg%252F11swmy6yh8%2C%252Fg%252F11hzcqhmq1%2C%252Fg%252F11c54dt85y%26hl%3Den-US&hl=enUS"
+            width="100%"
+            height="420px"
+            frameborder="0"
+          />
 
 ## Interoperability
 
@@ -61,28 +63,28 @@ While DuckDB has its own database format, DataFusion relies on Arrow and Parquet
 
 It looks like DataFusion is catching up with DuckDB but it seems to perform more consistent on querying Parquet files.
 
-![My own Image](/images/blog/duckdb/cold_run.png)
+![My own Image](https://img.screenier.com/embed?url=https%3A%2F%2Fbenchmark.clickhouse.com%2F%23eyJzeXN0ZW0iOnsiQWxsb3lEQiI6ZmFsc2UsIkF0aGVuYSAocGFydGl0aW9uZWQpIjpmYWxzZSwiQXRoZW5hIChzaW5nbGUpIjpmYWxzZSwiQXVyb3JhIGZvciBNeVNRTCI6ZmFsc2UsIkF1cm9yYSBmb3IgUG9zdGdyZVNRTCI6ZmFsc2UsIkJ5Q29uaXR5IjpmYWxzZSwiQnl0ZUhvdXNlIjpmYWxzZSwiY2hEQiI6ZmFsc2UsIkNpdHVzIjpmYWxzZSwiQ2xpY2tIb3VzZSBDbG91ZCAoYXdzKSI6ZmFsc2UsIkNsaWNrSG91c2UgQ2xvdWQgKGF3cykgUGFyYWxsZWwgUmVwbGljYXMgT04iOmZhbHNlLCJDbGlja0hvdXNlIENsb3VkIChnY3ApIjpmYWxzZSwiQ2xpY2tIb3VzZSBDbG91ZCAoZ2NwKSBQYXJhbGxlbCBSZXBsaWNhcyBPTiI6ZmFsc2UsIkNsaWNrSG91c2UgKGRhdGEgbGFrZSwgcGFydGl0aW9uZWQpIjpmYWxzZSwiQ2xpY2tIb3VzZSAoZGF0YSBsYWtlLCBzaW5nbGUpIjpmYWxzZSwiQ2xpY2tIb3VzZSAoUGFycXVldCwgcGFydGl0aW9uZWQpIjpmYWxzZSwiQ2xpY2tIb3VzZSAoUGFycXVldCwgc2luZ2xlKSI6ZmFsc2UsIkNsaWNrSG91c2UgKHdlYikiOmZhbHNlLCJDbGlja0hvdXNlIjpmYWxzZSwiQ2xpY2tIb3VzZSAodHVuZWQpIjpmYWxzZSwiQ2xpY2tIb3VzZSAodHVuZWQsIG1lbW9yeSkiOmZhbHNlLCJDcmF0ZURCIjpmYWxzZSwiRGF0YWJlbmQiOmZhbHNlLCJEYXRhRnVzaW9uIChQYXJxdWV0LCBwYXJ0aXRpb25lZCkiOnRydWUsIkRhdGFGdXNpb24gKFBhcnF1ZXQsIHNpbmdsZSkiOmZhbHNlLCJBcGFjaGUgRG9yaXMiOmZhbHNlLCJEcnVpZCI6ZmFsc2UsIkR1Y2tEQiAoUGFycXVldCwgcGFydGl0aW9uZWQpIjp0cnVlLCJEdWNrREIiOnRydWUsIkVsYXN0aWNzZWFyY2giOmZhbHNlLCJFbGFzdGljc2VhcmNoICh0dW5lZCkiOmZhbHNlLCJHbGFyZURCIjpmYWxzZSwiR3JlZW5wbHVtIjpmYWxzZSwiSGVhdnlBSSI6ZmFsc2UsIkh5ZHJhIjpmYWxzZSwiSW5mb2JyaWdodCI6ZmFsc2UsIktpbmV0aWNhIjpmYWxzZSwiTWFyaWFEQiBDb2x1bW5TdG9yZSI6ZmFsc2UsIk1hcmlhREIiOmZhbHNlLCJNb25ldERCIjpmYWxzZSwiTW9uZ29EQiI6ZmFsc2UsIk1vdGhlcmR1Y2siOmZhbHNlLCJNeVNRTCAoTXlJU0FNKSI6ZmFsc2UsIk15U1FMIjpmYWxzZSwiT3hsYS5jb20iOmZhbHNlLCJQYXJhZGVEQiI6ZmFsc2UsIlBpbm90IjpmYWxzZSwiUG9zdGdyZVNRTCAodHVuZWQpIjpmYWxzZSwiUG9zdGdyZVNRTCI6ZmFsc2UsIlF1ZXN0REIgKHBhcnRpdGlvbmVkKSI6ZmFsc2UsIlF1ZXN0REIiOmZhbHNlLCJSZWRzaGlmdCI6ZmFsc2UsIlNlbGVjdERCIjpmYWxzZSwiU2luZ2xlU3RvcmUiOmZhbHNlLCJTbm93Zmxha2UiOmZhbHNlLCJTUUxpdGUiOmZhbHNlLCJTdGFyUm9ja3MiOmZhbHNlLCJUYWJsZXNwYWNlIjpmYWxzZSwiVGVtYm8gT0xBUCAoY29sdW1uYXIpIjpmYWxzZSwiVGltZXNjYWxlREIgKGNvbXByZXNzaW9uKSI6ZmFsc2UsIlRpbWVzY2FsZURCIjpmYWxzZSwiVW1icmEiOmZhbHNlfSwidHlwZSI6eyJDIjp0cnVlLCJjb2x1bW4tb3JpZW50ZWQiOnRydWUsIlBvc3RncmVTUUwgY29tcGF0aWJsZSI6dHJ1ZSwibWFuYWdlZCI6dHJ1ZSwiZ2NwIjp0cnVlLCJzdGF0ZWxlc3MiOnRydWUsIkphdmEiOnRydWUsIkMrKyI6dHJ1ZSwiTXlTUUwgY29tcGF0aWJsZSI6dHJ1ZSwicm93LW9yaWVudGVkIjp0cnVlLCJDbGlja0hvdXNlIGRlcml2YXRpdmUiOnRydWUsImVtYmVkZGVkIjp0cnVlLCJzZXJ2ZXJsZXNzIjp0cnVlLCJhd3MiOnRydWUsInBhcmFsbGVsIHJlcGxpY2FzIjp0cnVlLCJSdXN0Ijp0cnVlLCJzZWFyY2giOnRydWUsImRvY3VtZW50Ijp0cnVlLCJhbmFseXRpY2FsIjp0cnVlLCJzb21ld2hhdCBQb3N0Z3JlU1FMIGNvbXBhdGlibGUiOnRydWUsInRpbWUtc2VyaWVzIjp0cnVlfSwibWFjaGluZSI6eyIxNiB2Q1BVIDEyOEdCIjp0cnVlLCI4IHZDUFUgNjRHQiI6dHJ1ZSwic2VydmVybGVzcyI6dHJ1ZSwiMTZhY3UiOnRydWUsImM2YS40eGxhcmdlLCA1MDBnYiBncDIiOnRydWUsIkwiOnRydWUsIk0iOnRydWUsIlMiOnRydWUsIlhTIjp0cnVlLCJjNmEubWV0YWwsIDUwMGdiIGdwMiI6ZmFsc2UsIjE5MkdCIjp0cnVlLCIyNEdCIjp0cnVlLCIzNjBHQiI6dHJ1ZSwiNDhHQiI6dHJ1ZSwiNzIwR0IiOnRydWUsIjk2R0IiOnRydWUsIjE0MzBHQiI6dHJ1ZSwiZGV2Ijp0cnVlLCI3MDhHQiI6dHJ1ZSwiYzVuLjR4bGFyZ2UsIDUwMGdiIGdwMiI6dHJ1ZSwiYzUuNHhsYXJnZSwgNTAwZ2IgZ3AyIjp0cnVlLCJjNmEuNHhsYXJnZSwgMTUwMGdiIGdwMiI6dHJ1ZSwiY2xvdWQiOnRydWUsImRjMi44eGxhcmdlIjp0cnVlLCJyYTMuMTZ4bGFyZ2UiOnRydWUsInJhMy40eGxhcmdlIjp0cnVlLCJyYTMueGxwbHVzIjp0cnVlLCJTMiI6dHJ1ZSwiUzI0Ijp0cnVlLCIyWEwiOnRydWUsIjNYTCI6dHJ1ZSwiNFhMIjp0cnVlLCJYTCI6dHJ1ZSwiTDEgLSAxNkNQVSAzMkdCIjp0cnVlLCJjNmEuNHhsYXJnZSwgNTAwZ2IgZ3AzIjp0cnVlfSwiY2x1c3Rlcl9zaXplIjp7IjEiOnRydWUsIjIiOnRydWUsIjQiOnRydWUsIjgiOnRydWUsIjE2Ijp0cnVlLCIzMiI6dHJ1ZSwiNjQiOnRydWUsIjEyOCI6dHJ1ZSwic2VydmVybGVzcyI6dHJ1ZSwiZGVkaWNhdGVkIjp0cnVlLCJ1bmRlZmluZWQiOnRydWV9LCJtZXRyaWMiOiJob3QiLCJxdWVyaWVzIjpbdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZV19&email=email%40acme.com&height=auto&width=auto&selector=table%23details&max_stale=1d)
 
 Duckdb's own database format still performs better but the gap is probably going to be less over time, making performance not the main differentiator between the two.
 
-![My own Image](/images/blog/duckdb/hot_run.png)
-![My own Image](https://app.plusdocs.com/emrekabakci-s53q/snapshot/clwe7uxv4006ljw082w33w217)
 [ClickBench Link](https://benchmark.clickhouse.com/#eyJzeXN0ZW0iOnsiQWxsb3lEQiI6ZmFsc2UsIkF0aGVuYSAocGFydGl0aW9uZWQpIjpmYWxzZSwiQXRoZW5hIChzaW5nbGUpIjpmYWxzZSwiQXVyb3JhIGZvciBNeVNRTCI6ZmFsc2UsIkF1cm9yYSBmb3IgUG9zdGdyZVNRTCI6ZmFsc2UsIkJ5Q29uaXR5IjpmYWxzZSwiQnl0ZUhvdXNlIjpmYWxzZSwiY2hEQiI6ZmFsc2UsIkNpdHVzIjpmYWxzZSwiQ2xpY2tIb3VzZSBDbG91ZCAoYXdzKSI6ZmFsc2UsIkNsaWNrSG91c2UgQ2xvdWQgKGF3cykgUGFyYWxsZWwgUmVwbGljYXMgT04iOmZhbHNlLCJDbGlja0hvdXNlIENsb3VkIChnY3ApIjpmYWxzZSwiQ2xpY2tIb3VzZSBDbG91ZCAoZ2NwKSBQYXJhbGxlbCBSZXBsaWNhcyBPTiI6ZmFsc2UsIkNsaWNrSG91c2UgKGRhdGEgbGFrZSwgcGFydGl0aW9uZWQpIjpmYWxzZSwiQ2xpY2tIb3VzZSAoZGF0YSBsYWtlLCBzaW5nbGUpIjpmYWxzZSwiQ2xpY2tIb3VzZSAoUGFycXVldCwgcGFydGl0aW9uZWQpIjpmYWxzZSwiQ2xpY2tIb3VzZSAoUGFycXVldCwgc2luZ2xlKSI6ZmFsc2UsIkNsaWNrSG91c2UgKHdlYikiOmZhbHNlLCJDbGlja0hvdXNlIjpmYWxzZSwiQ2xpY2tIb3VzZSAodHVuZWQpIjpmYWxzZSwiQ2xpY2tIb3VzZSAodHVuZWQsIG1lbW9yeSkiOmZhbHNlLCJDcmF0ZURCIjpmYWxzZSwiRGF0YWJlbmQiOmZhbHNlLCJEYXRhRnVzaW9uIChQYXJxdWV0LCBwYXJ0aXRpb25lZCkiOnRydWUsIkRhdGFGdXNpb24gKFBhcnF1ZXQsIHNpbmdsZSkiOmZhbHNlLCJBcGFjaGUgRG9yaXMiOmZhbHNlLCJEcnVpZCI6ZmFsc2UsIkR1Y2tEQiAoUGFycXVldCwgcGFydGl0aW9uZWQpIjp0cnVlLCJEdWNrREIiOnRydWUsIkVsYXN0aWNzZWFyY2giOmZhbHNlLCJFbGFzdGljc2VhcmNoICh0dW5lZCkiOmZhbHNlLCJHbGFyZURCIjpmYWxzZSwiR3JlZW5wbHVtIjpmYWxzZSwiSGVhdnlBSSI6ZmFsc2UsIkh5ZHJhIjpmYWxzZSwiSW5mb2JyaWdodCI6ZmFsc2UsIktpbmV0aWNhIjpmYWxzZSwiTWFyaWFEQiBDb2x1bW5TdG9yZSI6ZmFsc2UsIk1hcmlhREIiOmZhbHNlLCJNb25ldERCIjpmYWxzZSwiTW9uZ29EQiI6ZmFsc2UsIk1vdGhlcmR1Y2siOmZhbHNlLCJNeVNRTCAoTXlJU0FNKSI6ZmFsc2UsIk15U1FMIjpmYWxzZSwiT3hsYS5jb20iOmZhbHNlLCJQYXJhZGVEQiI6ZmFsc2UsIlBpbm90IjpmYWxzZSwiUG9zdGdyZVNRTCAodHVuZWQpIjpmYWxzZSwiUG9zdGdyZVNRTCI6ZmFsc2UsIlF1ZXN0REIgKHBhcnRpdGlvbmVkKSI6ZmFsc2UsIlF1ZXN0REIiOmZhbHNlLCJSZWRzaGlmdCI6ZmFsc2UsIlNlbGVjdERCIjpmYWxzZSwiU2luZ2xlU3RvcmUiOmZhbHNlLCJTbm93Zmxha2UiOmZhbHNlLCJTUUxpdGUiOmZhbHNlLCJTdGFyUm9ja3MiOmZhbHNlLCJUYWJsZXNwYWNlIjpmYWxzZSwiVGVtYm8gT0xBUCAoY29sdW1uYXIpIjpmYWxzZSwiVGltZXNjYWxlREIgKGNvbXByZXNzaW9uKSI6ZmFsc2UsIlRpbWVzY2FsZURCIjpmYWxzZSwiVW1icmEiOmZhbHNlfSwidHlwZSI6eyJDIjp0cnVlLCJjb2x1bW4tb3JpZW50ZWQiOnRydWUsIlBvc3RncmVTUUwgY29tcGF0aWJsZSI6dHJ1ZSwibWFuYWdlZCI6dHJ1ZSwiZ2NwIjp0cnVlLCJzdGF0ZWxlc3MiOnRydWUsIkphdmEiOnRydWUsIkMrKyI6dHJ1ZSwiTXlTUUwgY29tcGF0aWJsZSI6dHJ1ZSwicm93LW9yaWVudGVkIjp0cnVlLCJDbGlja0hvdXNlIGRlcml2YXRpdmUiOnRydWUsImVtYmVkZGVkIjp0cnVlLCJzZXJ2ZXJsZXNzIjp0cnVlLCJhd3MiOnRydWUsInBhcmFsbGVsIHJlcGxpY2FzIjp0cnVlLCJSdXN0Ijp0cnVlLCJzZWFyY2giOnRydWUsImRvY3VtZW50Ijp0cnVlLCJhbmFseXRpY2FsIjp0cnVlLCJzb21ld2hhdCBQb3N0Z3JlU1FMIGNvbXBhdGlibGUiOnRydWUsInRpbWUtc2VyaWVzIjp0cnVlfSwibWFjaGluZSI6eyIxNiB2Q1BVIDEyOEdCIjp0cnVlLCI4IHZDUFUgNjRHQiI6dHJ1ZSwic2VydmVybGVzcyI6dHJ1ZSwiMTZhY3UiOnRydWUsImM2YS40eGxhcmdlLCA1MDBnYiBncDIiOnRydWUsIkwiOnRydWUsIk0iOnRydWUsIlMiOnRydWUsIlhTIjp0cnVlLCJjNmEubWV0YWwsIDUwMGdiIGdwMiI6ZmFsc2UsIjE5MkdCIjp0cnVlLCIyNEdCIjp0cnVlLCIzNjBHQiI6dHJ1ZSwiNDhHQiI6dHJ1ZSwiNzIwR0IiOnRydWUsIjk2R0IiOnRydWUsIjE0MzBHQiI6dHJ1ZSwiZGV2Ijp0cnVlLCI3MDhHQiI6dHJ1ZSwiYzVuLjR4bGFyZ2UsIDUwMGdiIGdwMiI6dHJ1ZSwiYzUuNHhsYXJnZSwgNTAwZ2IgZ3AyIjp0cnVlLCJjNmEuNHhsYXJnZSwgMTUwMGdiIGdwMiI6dHJ1ZSwiY2xvdWQiOnRydWUsImRjMi44eGxhcmdlIjp0cnVlLCJyYTMuMTZ4bGFyZ2UiOnRydWUsInJhMy40eGxhcmdlIjp0cnVlLCJyYTMueGxwbHVzIjp0cnVlLCJTMiI6dHJ1ZSwiUzI0Ijp0cnVlLCIyWEwiOnRydWUsIjNYTCI6dHJ1ZSwiNFhMIjp0cnVlLCJYTCI6dHJ1ZSwiTDEgLSAxNkNQVSAzMkdCIjp0cnVlLCJjNmEuNHhsYXJnZSwgNTAwZ2IgZ3AzIjp0cnVlfSwiY2x1c3Rlcl9zaXplIjp7IjEiOnRydWUsIjIiOnRydWUsIjQiOnRydWUsIjgiOnRydWUsIjE2Ijp0cnVlLCIzMiI6dHJ1ZSwiNjQiOnRydWUsIjEyOCI6dHJ1ZSwic2VydmVybGVzcyI6dHJ1ZSwiZGVkaWNhdGVkIjp0cnVlLCJ1bmRlZmluZWQiOnRydWV9LCJtZXRyaWMiOiJob3QiLCJxdWVyaWVzIjpbdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZV19)
 
-## Do what's
+## Conclusion
 
-* Duckdb has a huge advantage being installed in many data people's laptops, by 10x [1.3k installs last month as of today in brew](https://formulae.brew.sh/formula/duckdb) compared to DataFusion, which is around [100 installs last month](https://formulae.brew.sh/formula/duckdb). I assume NVIDIA, Apple and Alibaba has much more installs in their clusters but I'm not sure about their production usage.
+DuckDB has a huge advantage being installed in many data people's laptops. 
+
+<div class="grid grid-cols-2 gap-4">
+  <div class="p-0">
+    <img src="https://img.screenier.com/embed?url=https%3A%2F%2Fformulae.brew.sh%2Fformula%2Fduckdb&email=email%40acme.com&height=auto&width=auto&selector=%23default+%3E+table%3Anth-child%2815%29&max_stale=1d" style={{height: "450px"}}/>
+  </div>
+  <div class="p-0">
+    <img src="https://img.screenier.com/embed?url=https%3A%2F%2Fformulae.brew.sh%2Fformula%2Fdatafusion&email=email%40acme.com&height=auto&width=auto&selector=%23default+%3E+table%3Anth-child%2815%29&max_stale=1d" style={{height: "450px"}}/>
+  </div>
+</div>
+
+
+I assume NVIDIA, Apple and Alibaba has much more installs in their clusters but I'm not sure about their production usage.
 DuckDB's main interface is SQL and they heavily lean on it, while DataFusion bets on Rust and Arrow.
 
-Your choice between DuckDB and Apache DataFusion should consider:
-
-- **Community**: DuckDB offers centralized support, while DataFusion benefits from a diverse Apache community.
-- **Architecture**: DuckDB is ideal for single-node processing with C++ performance and advanced SQL features. DataFusion is suited for distributed and streaming data processing with Rust’s safety and performance.
-- **Interoperability**: DuckDB supports multiple languages and both in-memory and disk formats. DataFusion excels with Arrow and Parquet integration but requires Rust for advanced features.
-- **Installation and Ease of Use**: DuckDB provides a more comprehensive getting started guide, and both offer smooth CLI installations.
-
-Both technologies are here to stay. DuckDB will continue investing in SQL and community features through their Foundation and commercial partnerships. Apache DataFusion’s adoption by companies like NVIDIA, Apple, and Alibaba highlights its strength in streaming and distributed processing, making it a top choice for large-scale data processing needs.
-
----
-
-How does this look? Any more adjustments or additions?
+Both technologies are here to stay. DuckDB will continue investing in SQL and community features through their Foundation and commercial partnerships. 
+Apache DataFusion’s adoption by companies like NVIDIA, Apple, and Alibaba highlights its strength in streaming and distributed processing, making it a top choice for large-scale data processing needs.

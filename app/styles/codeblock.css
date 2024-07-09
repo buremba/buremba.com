@@ -110,6 +110,7 @@ code {
   position: relative;
   padding: 0.2em 1em 0.2em 4em;
   cursor: text;
+  font-size: 13px;
 }
 
 .line-numbers .highlight-line::before {

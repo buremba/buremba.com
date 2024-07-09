@@ -5,9 +5,11 @@ import readingTime from 'reading-time'
 import { bundleMDX } from 'mdx-bundler'
 import rehypeSlug from 'rehype-slug'
 import rehypeHeadings from 'rehype-autolink-headings'
+import remarkGfm from 'remark-gfm'
 import rehypeHighlightCode from './rehype-highlight-code'
 import rehypeMetaAttribute from './rehype-meta-attribute'
 import { rehypeAccessibleEmojis } from 'rehype-accessible-emojis'
+import rehypeRemark from 'rehype-remark'
 
 import type { Frontmatter } from '../types/frontmatter'
 
@@ -22,6 +24,10 @@ async function getMdxByPath(mdxPath) {
   const source = fs.readFileSync(path.join(process.cwd(), mdxPath), 'utf8')
   const { code, frontmatter } = await bundleMDX(source, {
     xdmOptions(options) {
+      options.remarkPlugins = [
+        ...(options.remarkPlugins ?? []),
+        remarkGfm,
+      ]
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []),
         rehypeMetaAttribute,

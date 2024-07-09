@@ -46,7 +46,7 @@ export default async function BlogPost({ params }) {
     <Fragment>
       <div
         className={classNames(
-          'relative flex justify-between mt-12 mb-12 xl:-mr-52',
+          'relative flex justify-between mt-12 mb-12' + (frontmatter.toc ? ' xl:-mr-52' : ''),
           {
             'flex-row-reverse': Boolean(frontmatter.toc),
           }
@@ -57,7 +57,7 @@ export default async function BlogPost({ params }) {
             <QuickNav />
           </aside>
         )}
-        <article className="max-w-3xl min-w-0 text-base lg:text-lg text-fore-subtle">
+        <article className="max-w-4xl min-w-0 text-base lg:text-lg text-fore-subtle">
           <div className="mb-2 text-sm tracking-normal text-fore-subtle">
             <span>
               <time dateTime={publishedAt.toISOString()}>
@@ -78,7 +78,7 @@ export default async function BlogPost({ params }) {
               </Fragment>
             )}
           </div>
-          <h1 className="mb-10 text-4xl font-extrabold lg:text-5xl text-fore-primary">
+          <h1 className="leading-normal mb-10 text-5xl font-extrabold text-fore-primary">
             {frontmatter.title}
           </h1>
           <Component components={components} />
