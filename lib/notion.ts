@@ -12,7 +12,7 @@ export async function getProjects() {
       database_id: dbid_projects,
       sorts: [
         {
-          property: 'Type',
+          property: 'Type', 
           timestamp: 'last_edited_time',
           direction: 'descending',
         },
