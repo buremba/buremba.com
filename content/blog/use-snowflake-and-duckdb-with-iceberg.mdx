@@ -184,7 +184,7 @@ SELECT date_trunc('month', product_category),
 FROM my_transformed_table
 ```
 
-If your team is building a data application, and serving the data via a BI tool, you have a [variety of options](https://iceberg.apache.org/vendors/)([2](https://cloud.google.com/bigquery/docs/iceberg-tables)) to use any other tool that supports Iceberg. 
+If your team is building a data application, and serving the data via a BI tool, you have a [variety of options](https://iceberg.apache.org/vendors/) to use any other tool that supports Iceberg. 
 
 One important note is that Snowflake catalog doesn't expose `metadata.json` file for Iceberg tables, the output has the following directory structure:
 
