@@ -203,6 +203,8 @@ If you need the direct URI for the metadata file to the Iceberg table, [here is]
 SELECT SYSTEM$GET_ICEBERG_TABLE_INFORMATION('my_transformed_table');
 ```
 
+The file is generated lazily if it doesn't exist yet:
+
 ```
 +-----------------------------------------------------------------------------------------------------------+
 | SYSTEM$GET_ICEBERG_TABLE_INFORMATION('DB1.SCHEMA1.IT1')                                                   |
