@@ -100,7 +100,8 @@ COPY INTO my_iceberg_table(boolean_col, int_col, long_col, float_col, double_col
 Snowflake also started targeting Spark using its flavour of Spark, called [Snowpark](https://docs.snowflake.com/en/developer-guide/snowpark/index).
 It was probably the second hot topic after Iceberg in Snowflake Summit as Snowflake wants to eat Databricks's lunch but in terms of ecosystem, Spark is still winning thanks for its ecosystem.
 
-If you're already using Databricks / Google Dataproc / AWS EMR, you can use [Spark's Iceberg integration](https://iceberg.apache.org/docs/1.5.1/spark-getting-started/#reading) to write Iceberg tables without using Snowflake's compute. Later, you can use Snowflake's [object storage](https://docs.snowflake.com/en/user-guide/tables-iceberg-configure-catalog-integration-object-storage) catalog to create Iceberg tables.
+If you're already using Databricks / Google Dataproc / AWS EMR, you can use [Spark's Iceberg integration](https://iceberg.apache.org/docs/1.5.1/spark-getting-started/#reading) to write Iceberg tables without using Snowflake's compute. 
+Later, you can use Snowflake's [object storage](https://docs.snowflake.com/en/user-guide/tables-iceberg-configure-catalog-integration-object-storage) catalog to create Iceberg tables.
 If you have AWS / GCP credits, generate data on the fly using Spark and have huge data sets, this approach can save you a lot of money because you don't need to pay for Snowflake's compute:
 
 ```sql
@@ -185,6 +186,33 @@ FROM my_transformed_table
 
 If your team is building a data application, and serving the data via a BI tool, you have a [variety of options](https://iceberg.apache.org/vendors/)([2](https://cloud.google.com/bigquery/docs/iceberg-tables)) to use any other tool that supports Iceberg. 
 
+One important note is that Snowflake catalog doesn't expose `metadata.json` file for Iceberg tables, the output has the following directory structure:
+
+```bash
+> data
+ > data_file.parquet -- data files
+> metadata
+ > {timestamp}.metadata.json -- includes schema
+   {timestamp}.metadata.avro -- includes statistics
+ > version-hint.text -- last version
+```
+
+If you need the direct URI for the metadata file to the Iceberg table, [here is](https://docs.snowflake.com/en/sql-reference/functions/system_get_iceberg_table_information) how you can generate it:
+
+```sql
+SELECT SYSTEM$GET_ICEBERG_TABLE_INFORMATION('my_transformed_table');
+```
+
+```
++-----------------------------------------------------------------------------------------------------------+
+| SYSTEM$GET_ICEBERG_TABLE_INFORMATION('DB1.SCHEMA1.IT1')                                                   |
+|-----------------------------------------------------------------------------------------------------------|
+| {"metadataLocation":"s3://mybucket/metadata/v1.metadata.json","status":"success"}                         |
++-----------------------------------------------------------------------------------------------------------+
+```
+
+This operation doesn't require a running warehouse and it's useful when you use [Clickhouse](https://clickhouse.com/docs/en/engines/table-engines/integrations/iceberg) or [BigQuery BigLake](https://cloud.google.com/bigquery/docs/iceberg-tables).
+
 ##  Which Compute Should I Use?
 
 There is no one-size-fits-all answer to this question. Almost all the advanced data-warehouses support Iceberg tables natively nowadays and comparing Databricks and Snowflake, [there is no clear winner in terms of performance](https://medium.com/dbsql-sme-engineering/uniform-snowflake-performance-3a5a7886abb0).
@@ -200,3 +228,5 @@ An interesting player for me is DuckDB because as a data engineer using a fancy 
 If you prefer picking the technology based on its popularity, (thus ecosystem) [here](https://db-engines.com/en/ranking_trend/system/Snowflake%3BDatabricks%3BGoogle+BigQuery%3BDuckDB) are the trends:
 
 ![Live Screenshot from Screenier](https://img.screenier.com/embed?url=https%3A%2F%2Fdb-engines.com%2Fen%2Franking_trend%2Fsystem%2FSnowflake%253BDatabricks%253BGoogle%2BBigQuery%26kle&email=email%40acme.com&height=auto&width=auto&selector=%23chart-container-1&max_stale=1d&delay=4000)
+import { data } from "autoprefixer"
+
