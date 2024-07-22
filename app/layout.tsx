@@ -19,7 +19,7 @@ const FontFiraCode = Fira_Code({
 export const metadata: Metadata = {
   title: {
     default: 'Burak Kabakci | personal website',
-    template: '%s | Burak Kabakci',
+    template: '%s',
   },
   description: 'Burak\'s personal website',
   openGraph: {
