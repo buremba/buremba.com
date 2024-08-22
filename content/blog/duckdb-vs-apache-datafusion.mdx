@@ -50,7 +50,10 @@ DataFusion on the other hand, seems to focus more on making stream processing ha
 
 **DuckDB** integrates seamlessly with various programming languages including [TypeScript](https://duckdb.org/docs/api/nodejs), [Java](https://duckdb.org/docs/api/java/), [Golang](https://duckdb.org/docs/api/go/), and [native Python](https://duckdb.org/docs/api/python/). It supports both in-memory and persistent disk formats ([details](https://duckdb.org/docs/connect/overview)), making it highly versatile.
 
-**Apache DataFusion** emphasizes interoperability through well-known standards like [Apache Arrow](https://arrow.apache.org/) and [Parquet](https://parquet.apache.org/). Both tools support Apache Iceberg and Delta Lake, but DataFusion currently requires Rust for these features, limiting its SQL interface. More on integrating Delta Lake with DataFusion can be found [here](https://delta-io.github.io/delta-rs/integrations/delta-lake-datafusion/).
+**Apache DataFusion** emphasizes interoperability through well-known standards like [Apache Arrow](https://arrow.apache.org/) and [Parquet](https://parquet.apache.org/). 
+Both tools support Apache Iceberg and Delta Lake, but DataFusion currently requires Rust for these features, limiting its SQL interface. 
+More on integrating Delta Lake with DataFusion can be found [here](https://delta-io.github.io/delta-rs/integrations/delta-lake-datafusion/).
+If DuckDB focuses on its own database format over time, Datafusion will probably gain advantage in this area as it's focus is solely on Arrow and Parquet.
 
 Both DuckDB and DataFusion offer smooth installation via CLI tools. DuckDB’s [getting started guide](https://duckdb.org/docs/data/overview) is more comprehensive compared to DataFusion’s [usage guide](https://datafusion.apache.org/user-guide/cli/usage.html).
 Both support querying data on the fly from local or remote files in your data lake.
