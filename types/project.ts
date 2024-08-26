@@ -3,7 +3,7 @@ export type Project = {
   title: string
   description: string
   link: string
-  type: 'Open Source' | 'Game'
+  type: 'Open Source' | 'Startup'
   year: string
   tags?: string[]
   thumbnail?: string

@@ -33,6 +33,35 @@ export default async function Projects() {
           })}
         </div>
       </section>
+      <h1 className="mt-3 mb-2 text-2xl font-bold text-accent">Other</h1>
+      <section className="mb-6">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:-mx-6 justify-items-start md:grid-cols-3 lg:grid-cols-4">
+          <ButtonPop>
+            <ProjectCard
+              project={{
+                id: 'refine',
+                title: 'Refine',
+                description: 'Seed Investor',
+                link: 'https://refine.dev',
+                type: 'Startup',
+                year: '2023',
+              }}
+            />
+          </ButtonPop>
+          <ButtonPop>
+            <ProjectCard
+              project={{
+                id: 'improvado',
+                title: 'Improvado',
+                description: 'Advisor',
+                link: 'https://improvado.com',
+                type: 'Startup',
+                year: '2024',
+              }}
+            />
+          </ButtonPop>
+        </div>
+      </section>
       <Contact />
     </Fragment>
   )
@@ -40,11 +69,7 @@ export default async function Projects() {
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <a
-      href={project.link}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
+    <a href={project.link} target="_blank" rel="noopener noreferrer">
       <div className="relative flex flex-col justify-between w-full h-full px-6 py-5 group bg-back-secondary hover:bg-back-secondary">
         <div className="flex justify-between pb-10 space-x-3 sm:space-x-0">
           <div>
