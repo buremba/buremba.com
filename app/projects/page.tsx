@@ -33,14 +33,14 @@ export default async function Projects() {
           })}
         </div>
       </section>
-      <h1 className="mt-3 mb-2 text-2xl font-bold text-accent">Other</h1>
+      <h1 className="mt-3 mb-2 text-2xl font-bold text-accent">Others</h1>
       <section className="mb-6">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:-mx-6 justify-items-start md:grid-cols-3 lg:grid-cols-4">
           <ButtonPop>
             <ProjectCard
               project={{
                 id: 'refine',
-                title: 'Refine',
+                title: 'refine.dev',
                 description: 'Seed Investor',
                 link: 'https://refine.dev',
                 type: 'Startup',

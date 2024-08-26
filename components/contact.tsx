@@ -17,7 +17,7 @@ export function Contact() {
           <ExtLink link="https://github.com/buremba">Github</ExtLink>,{' '}
           <br /><br />
           or/and listen music on {' '}
-          <ExtLink link="https://lastfm.com/buremba">Last.fm</ExtLink>{' '}
+          <ExtLink link="https://www.last.fm/user/Buremba">Last.fm</ExtLink>{' '}
           <span role="img" aria-label="wave">
             👋
           </span>
