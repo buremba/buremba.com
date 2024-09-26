@@ -166,8 +166,6 @@ In this post, we will compare the features of the data warehouses. Based on my p
 
 ## Best overall: Snowflake ❄️
 
-### Accounts
-
 To run queries on Snowflake, you need to create an account. Snowflake accounts are within a region in your cloud provider so you can't have two tables in different regions / cloud providers in a single account. This design is mainly to isolate the unexpected egress costs in cloud providers, they rather advice auto replication feature which makes sure the data is copied only once in different regions. 
 
 ### SQL-for-everything
@@ -183,33 +181,20 @@ Moreover, the features such as dynamic tables makes it easier to use Snowflake w
 * Snowflake [scales out Pandas](https://docs.snowflake.com/en/developer-guide/snowpark/python/pandas-on-snowflake), as an alternative to Databricks's PySpark.
 * You can connect to your cloud (Google Cloud Functions, AWS Lambda, etc.) [external functions](https://docs.snowflake.com/en/sql-reference/external-functions-introduction).
 * You can run Docker images inside your account with [Container Services](https://docs.snowflake.com/en/developer-guide/snowpark-container-services/overview).
-* Snowflake has [Streams](https://docs.snowflake.com/en/user-guide/streams-intro) and [Tasks](https://docs.snowflake.com/en/user-guide/tasks-intro), which let you create workflows based on event and time-based triggers. For incremental processing, you have these options:
-
-### First-class data application experience
-
-Snowflake [Native Application Framework](https://docs.snowflake.com/en/developer-guide/native-apps/native-apps-about) lets you process and share data between your partners, which powers their Marketplace offering. The experience is superior to AWS and GCP Marketplace.
-Snowflake Marketplace has around [3000 listings](https://app.snowflake.com/marketplace/data-products) today (2024-09).
+* Snowflake has [Streams](https://docs.snowflake.com/en/user-guide/streams-intro) and [Tasks](https://docs.snowflake.com/en/user-guide/tasks-intro), which let you create workflows based on event and time-based triggers.
+* Snowflake [Native Application Framework](https://docs.snowflake.com/en/developer-guide/native-apps/native-apps-about) provides first-class data application experience, sharing data and code between your partner. It's superior to AWS and GCP Marketplace.
 
 ## Hidden Gem: BigQuery
 
-I believe BigQuery is the most underrated data warehouse. It was built upon Google's modern infrastructure years ago and can run on other clouds such as AWS via Omni. It would be a standalone product outside of GCP, it would probably succeed more as a product.
-
+I believe BigQuery is the most underrated data warehouse, given that's almost 15 years old. It was built upon Google's modern infrastructure years ago and can run on other clouds such as AWS via Omni. 
+It would be a standalone product outside of GCP, it would probably succeed more as a product.
 Snowflake's major cloud provider support is AWS and BigQuery is indeed a big competitor of Snowflake but selling BigQuery outside of the GCP ecosystem is touch as it's highly coupled with GCP internals. 
 
-### Goodbye databases, hello projects
+### Highly coupled with GCP
 
-BigQuery doesn't have the database/schema / table hierarchy unlike most of the traditional and modern data warehouses. Your GCP project is your database and you use a non-SQL API to create datasets. Under the dataset, you can create tables but you can't create schemas via SQL. Here is how the full qualifier of your tables:
-
-```sql
-select * from `gcp-project`.`dataset-name`.`table-name`
-```
-For the people who are coming from the Hive / Hadoop or RDBMS world, this is weird and I believe it caused a lot of friction for many people.
-I must admit that it also feels weird to call an API to create datasets, which correspond to schemas in databases. I would rather use `CREATE SCHEMA ..` syntax rather than 
-
-### Highlights
-
-* Google Marketplace provides ways to share data with partners but BigQuery doesn't provide an application framework to build and deploy apps in a way advanced as Snowflake and Databricks. 
 * BigQuery integrates well with most GCP products and your Google Workspace data, which makes it a natural choice in the Google ecosystem.
+* BigQuery doesn't have the database/schema / table hierarchy unlike most of the traditional and modern data warehouses. Your GCP project is your database and you use a non-SQL API to create datasets. Under the dataset, you can create tables but you can't create schemas via SQL. Here is how the full qualifier of your tables.
+* Google Marketplace provides ways to share data with partners but BigQuery doesn't provide an application framework to build and deploy apps in a way advanced as Snowflake and Databricks. 
 * It's not obvious but if you use BigQuery Omni on AWS S3, you don't pay any egress cost so it's indeed cross-cloud unlike any of the AWS offerings.
 
 ### Connectivity
@@ -245,7 +230,7 @@ It can create tables but it's not feature-rich as its competitors. That makes it
 ---
 
 
-### TLDR
+### TLDR;
 
 * If you're on AWS, using Glue will give you the option to use both Athena, Redshift Serverless, Snowflake, and BigQuery. Athena is the easiest to start with on AWS and you can switch over Redshift Serverless over time.
 * If you're on GCP, BigQuery is probably the best option for you.
