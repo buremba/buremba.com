@@ -104,7 +104,16 @@
   }
 
   .noise-bg {
-    background-image: url("/images/noisy.png");
+    background-image: url('/images/noisy.png');
     /*background-color: aqua;*/
   }
+}
+
+span[aria-label='keycap: 5'],
+span[aria-label='keycap: 4'],
+span[aria-label='keycap: 3'],
+span[aria-label='keycap: 2'],
+span[aria-label='keycap: 1'] {
+  zoom: 1.5;
+  margin-left: 2px;
 }
