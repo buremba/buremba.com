@@ -155,18 +155,19 @@ In this post, we will compare the (advanced) features of the data warehouses.
 To run queries on Snowflake, you need to create an account. Snowflake accounts are within a region in your cloud provider so you can't have two tables in different regions / cloud providers in a single account. This design is mainly to isolate the unexpected egress costs in cloud providers, they rather advice auto replication feature which makes sure the data is copied only once in different regions. 
 
 ### SQL-for-everything
-Snowflake provides SQL support for the resources, which I love. You create accounts, provision warehouses, run Kubernetes, (it's weird to write YML in SQL though) and share data just with SQL. Their syntax is consistent, rich, and well-documented. Their `CREATE [whatever]` can provide a very convenient onboarding experience for newcomers. You don't need to dig into specific REST API documentation or deal with authentication. 
+Snowflake provides SQL support for the resources, which I love. You create accounts, provision warehouses, run Kubernetes, (it's weird to write YML in SQL though) and share data just with SQL. 
+Their syntax is consistent, rich, and well-documented. Their `CREATE [whatever]` can provide a very convenient onboarding experience for newcomers. 
+You don't need to dig into specific REST API documentation or deal with authentication. 
+Moreover, the features such as dynamic tables makes it easier to use Snowflake with SQL-based pipelines.
 
-### Connects all clouds
+
+### Connectivity
 
 * You can bring your Python / Javascript and map them as user-defined ([scalar](https://docs.snowflake.com/en/developer-guide/udf/python/udf-python-batch), [table](https://docs.snowflake.com/en/developer-guide/udf/python/udf-python-tabular-functions), [aggregate](https://docs.snowflake.com/en/developer-guide/udf/python/udf-python-aggregate-functions)) functions
 * Snowflake [scales out Pandas](https://docs.snowflake.com/en/developer-guide/snowpark/python/pandas-on-snowflake), as an alternative to Databricks's PySpark.
 * You can connect to your cloud (Google Cloud Functions, AWS Lambda, etc.) [external functions](https://docs.snowflake.com/en/sql-reference/external-functions-introduction).
 * You can run Docker images inside your account with [Container Services](https://docs.snowflake.com/en/developer-guide/snowpark-container-services/overview).
 * Snowflake has [Streams](https://docs.snowflake.com/en/user-guide/streams-intro) and [Tasks](https://docs.snowflake.com/en/user-guide/tasks-intro), which let you create workflows based on event and time-based triggers. For incremental processing, you have these options:
-
-![Compare tables](/images/blog/dwh/snowflake/mv_vs_dynamic_tables.png)
-
 
 ### First-class data application experience
 
@@ -189,14 +190,11 @@ select * from `gcp-project`.`dataset-name`.`table-name`
 For the people who are coming from the Hive / Hadoop or RDBMS world, this is weird and I believe it caused a lot of friction for many people.
 I must admit that it also feels weird to call an API to create datasets, which correspond to schemas in databases. I would rather use `CREATE SCHEMA ..` syntax rather than 
 
-### BigQuery as cross-cloud data warehouse
-
-
-
-### Ecosystem
+### Highlights
 
 * Google Marketplace provides ways to share data with partners but BigQuery doesn't provide an application framework to build and deploy apps in a way advanced as Snowflake and Databricks. 
 * BigQuery integrates well with most GCP products and your Google Workspace data, which makes it a natural choice in the Google ecosystem.
+* It's not obvious but if you use BigQuery Omni on AWS S3, you don't pay any egress cost so it's indeed cross-cloud unlike any of the AWS offerings.
 
 ### Connectivity
 
@@ -208,7 +206,7 @@ I must admit that it also feels weird to call an API to create datasets, which c
 * You can connect your Google data including [spreadsheets](https://cloud.google.com/bigquery/docs/connected-sheets) and [Google Drive](https://cloud.google.com/bigquery/docs/external-data-drive?hl=en).
 * You can use materialized views and continuous queries to create streaming / incremental data pipelines. 
 
-## Databricks
+## Most flexible: Databricks
 
 Databricks's onboarding experience is among the worst I had, primarily because I don't have much Spark experience. 
 
@@ -216,14 +214,16 @@ Databricks's onboarding experience is among the worst I had, primarily because I
 
 Databricks runs on Spark, one of the most popular data processing engines. It's a natural choice if you're already using Spark, on your own cloud. All the compute happens in your own environment with Databricks, 
 
-## Redshift Serverless
+## Cool again: Redshift Serverless
 
 ### Comeback from Redshift
 
-Years ago when Redshift came out in 2012, it revotionlized the data warehouse ecosystem because it was a huge boost from Hadoop to Redshift. However; over the last 10 years, its competitor Snowflake
+Years ago when Redshift came out in 2012, it revotionlized the data warehouse ecosystem because it was a huge boost from Hadoop to Redshift. However; over the last 10 years, its competitor Snowflake was eating Redshift's lunch. 
+Even Redshift sales people were selling Snowflake to their customers, probably because it's clearly a better a product and AWS makes money from Snowflake anyway for compute. 
 
+However; given that companies need to sign another contract with Snowflake, 
 
-## AWS Athena
+## Easiest to start with: AWS Athena
 
 AWS Athena is using AWS Glue as Data Catalog and it's a serverless data warehouse on the AWS data and Iceberg tables.
 It can create tables but it's not feature-rich as its competitors. That makes it a natural choice if you're on AWS and need something quick and easy to use.
