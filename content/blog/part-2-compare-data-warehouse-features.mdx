@@ -12,7 +12,7 @@ If you haven't seen yet, here is the previous post on pricing:
 
 * [Part 1: Comparing pricing model of data warehouses](/blog/part-1-compare-data-warehouse-pricing-model)
 
-In this post, we will compare the features of the data warehouses. Based on my personal experience, I added scores and product offering for each section:
+In this post, we will compare the features of the data warehouses. Based on my personal experience, I added scores and product offerings for each section:
 
 ## Features 
 
@@ -182,7 +182,7 @@ Moreover, the features such as dynamic tables makes it easier to use Snowflake w
 * You can connect to your cloud (Google Cloud Functions, AWS Lambda, etc.) [external functions](https://docs.snowflake.com/en/sql-reference/external-functions-introduction).
 * You can run Docker images inside your account with [Container Services](https://docs.snowflake.com/en/developer-guide/snowpark-container-services/overview).
 * Snowflake has [Streams](https://docs.snowflake.com/en/user-guide/streams-intro) and [Tasks](https://docs.snowflake.com/en/user-guide/tasks-intro), which let you create workflows based on event and time-based triggers.
-* Snowflake [Native Application Framework](https://docs.snowflake.com/en/developer-guide/native-apps/native-apps-about) provides first-class data application experience, sharing data and code between your partner. It's superior to AWS and GCP Marketplace.
+* Snowflake [Native Application Framework](https://docs.snowflake.com/en/developer-guide/native-apps/native-apps-about) provides a first-class data application experience, sharing data and code with your partner. It's superior to AWS and GCP Marketplace.
 
 ## Hidden Gem: BigQuery
 
@@ -193,14 +193,14 @@ Snowflake's major cloud provider support is AWS and BigQuery is indeed a big com
 ### Highly coupled with GCP
 
 * BigQuery integrates well with most GCP products and your Google Workspace data, which makes it a natural choice in the Google ecosystem.
-* BigQuery doesn't have the database/schema / table hierarchy unlike most of the traditional and modern data warehouses. Your GCP project is your database and you use a non-SQL API to create datasets. Under the dataset, you can create tables but you can't create schemas via SQL. Here is how the full qualifier of your tables.
+* BigQuery doesn't have the database/schema/table hierarchy unlike most of the traditional and modern data warehouses. Your GCP project is your database and you use a non-SQL API to create datasets. Under the dataset, you can create tables but you can't create schemas via SQL. Here is how the full qualifier of your tables.
 * Google Marketplace provides ways to share data with partners but BigQuery doesn't provide an application framework to build and deploy apps in a way advanced as Snowflake and Databricks. 
 * It's not obvious but if you use BigQuery Omni on AWS S3, you don't pay any egress cost so it's indeed cross-cloud unlike any of the AWS offerings.
 
 ### Connectivity
 
 * You can bring your Javascript and map them as user-defined ([scalar](https://cloud.google.com/bigquery/docs/user-defined-functions), [table](https://cloud.google.com/bigquery/docs/table-functions),[aggregate](https://cloud.google.com/bigquery/docs/user-defined-aggregates)) functions
-* BigQuery [run Spark procedures via Dataproc](https://cloud.google.com/bigquery/docs/spark-procedures), managed Spark cluster from GCP.
+* BigQuery [run Spark procedures via Dataproc](https://cloud.google.com/bigquery/docs/spark-procedures), managed Spark cluster offering from GCP.
 * You can connect to your Google Cloud Functions and run containers on Cloud Run via [remote functions]([https://docs.snowflake.com/en/sql-reference/external-functions-introduction](https://cloud.google.com/bigquery/docs/remote-functions)).
 * You can connect **cross-cloud data** on AWS and Azure via [Omni](https://cloud.google.com/bigquery/docs/omni-introduction) which doesn't incur any egress cost as Google runs BigQuery natively in your cloud provider.
 * You can connect most of your GCP data in and out for building workflows, using [BigTable](https://cloud.google.com/bigquery/docs/create-bigtable-external-table?hl=en0) and [PubSub](https://cloud.google.com/bigquery/docs/export-to-pubsub) integrations.
@@ -210,31 +210,31 @@ Snowflake's major cloud provider support is AWS and BigQuery is indeed a big com
 ## Most flexible: Databricks
 
 Databricks's onboarding experience is among the worst I had, primarily because I don't have much Spark experience. 
-Their BYOC approach (Bring your own cloud) is a good idea but it's not as easy as it sounds. You need to have a good understanding of Spark and Databricks to use it effectively.
+Their BYOC approach (Bring your own cloud) is a good idea but it's not as easy as it sounds. You need to have a good understanding of Spark and Databricks to use them effectively.
 
 Databricks runs on Spark, one of the most popular data processing engines. It's a natural choice if you're already using Spark, on your own cloud. 
 All the compute happens in your own environment with Databricks and you have full transparency. 
 
 ## Cool again: Redshift Serverless
 
-Years ago when Redshift came out in 2012, it revotionlized the data warehouse ecosystem because it was a huge boost from Hadoop to Redshift. However; over the last 10 years, its competitor Snowflake was eating Redshift's lunch. 
-Even Redshift sales people were selling Snowflake to their customers, probably because it's clearly a better a product and AWS makes money from Snowflake anyway for compute. 
+Years ago when Redshift came out in 2012, it revolutionised the data warehouse ecosystem because it was a huge boost from Hadoop to Redshift. However; over the last 10 years, its competitor Snowflake has been eating Redshift's lunch. 
+Even Redshift salespeople were selling Snowflake to their customers, probably because it's clearly a better product and AWS makes money from Snowflake anyway for compute. 
 
-Redshift Serverless feels like a comeback frod Redshift. Given that companies need to sign another contract with Snowflake, if they're already on AWS, Redshift Serverless is a natural choice today.
+Redshift Serverless feels like a comeback from Redshift. Given that companies need to sign another contract with Snowflake if they're already on AWS, Redshift Serverless is a natural choice today.
 
 ## Easiest to start with: AWS Athena
 
-AWS Athena is using AWS Glue as Data Catalog and it's a serverless data warehouse on the AWS data and Iceberg tables.
-It can create tables but it's not feature-rich as its competitors. That makes it a natural choice if you're on AWS and need something quick and easy to use.
+AWS Athena is using AWS Glue as a Data Catalog and it's a serverless data warehouse on the AWS data and Iceberg tables.
+It can create tables but it's simpler than its competitors. That makes it a natural choice if you're on AWS and need something quick and easy to use.
 
 ---
 
 
 ### TLDR;
 
-* If you're on AWS, using Glue will give you the option to use both Athena, Redshift Serverless, Snowflake, and BigQuery. Athena is the easiest to start with on AWS and you can switch over Redshift Serverless over time.
+* If you're on AWS, using Glue will give you the option to use Athena, Redshift Serverless, Snowflake, and BigQuery. Athena is the easiest to start with on AWS and you can switch over to Redshift Serverless over time.
 * If you're on GCP, BigQuery is probably the best option for you.
-* If you're cross cloud:
-	1. Snowflake is the best option for you if you have SQL-familiar people like analysts and analytics engineers.
-	2. Databricks is the best option for you if you have data engineers and data scientists, focusing on ML. 
+* If you're cross-cloud:
+	1. Snowflake is the best option if you have SQL-familiar people like analysts and analytics engineers.
+	2. Databricks is the best option if you have data engineers and data scientists, focusing on ML. 
 	3. If you're expanding to AWS from GCP, BigQuery is still worth investing in.
