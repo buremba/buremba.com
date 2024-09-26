@@ -8,12 +8,11 @@ toc: false
 ---
 
 
-If you haven't seen yet, here are the previous:
+If you haven't seen yet, here is the previous post on pricing:
 
-* [Part 1: Comparing performance of data warehouses on Iceberg Tables](/blog/part-2-compare-data-warehouse-workload-performance-iceberg)
-* [Part 2: Comparing features of data warehouses](/blog/part-3-compare-data-warehouse-features)
+* [Part 1: Comparing pricing model of data warehouses](/blog/part-1-compare-data-warehouse-pricing-model)
 
-In this post, we will compare the (advanced) features of the data warehouses.
+In this post, we will compare the features of the data warehouses. Based on my personal experience, I added scores and product offering for each section:
 
 ## Features 
 
@@ -47,20 +46,28 @@ In this post, we will compare the (advanced) features of the data warehouses.
     </tr>
     <tr>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Scheduling**</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Tasks 5️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Tasks]() 5️⃣</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Crons</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Scheduled queries](https://cloud.google.com/bigquery/docs/scheduling-queries)</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
     </tr>
     <tr>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Data Sharing Capabilities**</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Secure Share</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Clean Rooms</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Delta Sharing](https://www.databricks.com/product/delta-sharing)</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">** Sharing Capabilities**</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Data (Secure share), Code () 5️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Clean Rooms, VMs 4️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Data Sharing](), VMs 4️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Delta Sharing](https://www.databricks.com/product/delta-sharing), Compute 5️⃣</td>
             <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
 
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Marketplace**</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[3K listing](https://app.snowflake.com/marketplace), most advanced 5️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[5K listing](https://aws.amazon.com/marketplace) 4️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[3.5K listing](https://console.cloud.google.com/marketplace?hl=en) 3️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[2.5K listing](https://marketplace.databricks.com/?sortBy=date), most advanced 5️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[5K listing](https://aws.amazon.com/marketplace)4️⃣</td>
     </tr>
     <tr>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Cloud**</td>
@@ -80,9 +87,9 @@ In this post, we will compare the (advanced) features of the data warehouses.
     </tr>
     <tr>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Bring your code**</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Containers, Pandas, Python / Javascript5️⃣</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Containers, Spark via Dataproc2️⃣</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">4️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Containers](https://docs.snowflake.com/en/developer-guide/snowpark-container-services/working-with-services), [Pandas](https://docs.snowflake.com/en/developer-guide/snowpark/python/pandas-on-snowflake), Python / Javascript5️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">1️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Containers, Spark via Datapro4️⃣</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Spark 5️⃣</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Spark, [Data Source Connectors](https://docs.aws.amazon.com/athena/latest/ug/running-federated-queries.html) 3️⃣</td>
     </tr>
@@ -94,14 +101,7 @@ In this post, we will compare the (advanced) features of the data warehouses.
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Delta Lake](https://docs.databricks.com/en/delta/index.html), Apache Iceberg 5️⃣</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Glue 3️⃣</td>
     </tr>
-    <tr>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Marketplace**</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[3K listing](https://app.snowflake.com/marketplace), most advanced 5️⃣</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[5K listing](https://aws.amazon.com/marketplace) 4️⃣</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[3.5K listing](https://console.cloud.google.com/marketplace?hl=en) 3️⃣</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[2.5K listing](https://marketplace.databricks.com/?sortBy=date), most advanced 5️⃣</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[5K listing](https://aws.amazon.com/marketplace)4️⃣</td>
-    </tr>
+    
     <tr>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Best for 🦄**</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[SQL-for-everything](./#sql-for-everything), analytics engineers</td>
@@ -129,10 +129,10 @@ In this post, we will compare the (advanced) features of the data warehouses.
   <tbody>
   <tr>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Maintenance**</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">5️⃣</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">3️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">4️⃣</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">4️⃣</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">5️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">3️⃣</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">3️⃣</td>
     </tr>
     <tr>
@@ -140,16 +140,24 @@ In this post, we will compare the (advanced) features of the data warehouses.
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">5️⃣</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">3️⃣</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">4️⃣</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">2️⃣</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">5️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">3️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">4️⃣</td>
     </tr>
     <tr>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Ecosystem**</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">4️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">4️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">4️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">5️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">4️⃣</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Capability**</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">5️⃣</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">3️⃣</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">4️⃣</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">2️⃣</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">5️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">4️⃣</td>
     </tr>
     </tbody>
 </table>
