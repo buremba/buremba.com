@@ -32,14 +32,14 @@ In this post, we will compare the (advanced) features of the data warehouses.
     <tr>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Streaming**</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Streams, <a href="https://docs.snowflake.com/en/user-guide/dynamic-tables-about">Dynamic Tables 5️⃣</a></td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Materialized tables 4️⃣</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Materialized table, Continuous query 4️⃣</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Delta Tables 5️⃣❔</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Materialized tables](https://docs.aws.amazon.com/redshift/latest/dg/materialized-view-create-sql-command.html) 4️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Materialized table](https://cloud.google.com/bigquery/docs/materialized-views-intro), [Continuous query](https://cloud.google.com/bigquery/docs/continuous-queries-introduction) 4️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Delta Live Tables](https://docs.databricks.com/en/delta-live-tables/sql-ref.html) 5️⃣❔</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">-</td>
     </tr>
     <tr>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**HTAP**</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">UniStore ❔</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"> UniStore ❔</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Aurora Integration </td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">GCP SQL + BigTable Integrations</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">-</td>
@@ -88,9 +88,9 @@ In this post, we will compare the (advanced) features of the data warehouses.
     </tr>
     <tr>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Catalog**</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Polaris (Apache Iceberg)</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Polaris](https://docs.snowflake.com/en/user-guide/tables-iceberg-configure-catalog-integration-rest) (Apache Iceberg), [AWS Glue](https://docs.snowflake.com/en/user-guide/tables-iceberg-configure-catalog-integration-glue)</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Glue</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Glue, Google Data Catalog4️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[AWS Glue](https://cloud.google.com/bigquery/docs/glue-federated-datasets), Google Data Catalog4️⃣</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Delta Lake 2️⃣</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Glue 3️⃣</td>
     </tr>

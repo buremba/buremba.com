@@ -15,40 +15,12 @@ While I'm developing [Universql](https://github.com/buremba/universql), I had a 
 
 ### Storage cost
 
-Often providers such as Redshift and Snowflake use their own proprietary database formats so while the pricing is based on the data volume, it's hard to estimate how much data space you will need before actually using them. 
+Often providers such as Redshift and Snowflake use their own proprietary database formats so while the pricing is based on the data volume, it's hard to estimate how much data space you will need before actually using them.
+However; looking at the storage pricing for [Snowflake](https://www.snowflake.com/legal-files/CreditConsumptionTable.pdf), [S3](https://aws.amazon.com/s3/pricing/), and [BigQuery](https://cloud.google.com/bigquery/pricing#storage) the margin is pretty small for the storage.
+From Snowflake, we know that the storage cost is usually < 10% of the total cost of data warehouses.
+Also, the compaction for the files don't make huge difference (~30%) in the storage according to [Clickbench](https://benchmark.clickhouse.com/#eyJzeXN0ZW0iOnsiQWxsb3lEQiI6dHJ1ZSwiQWxsb3lEQiAodHVuZWQpIjp0cnVlLCJBdGhlbmEgKHBhcnRpdGlvbmVkKSI6dHJ1ZSwiQXRoZW5hIChzaW5nbGUpIjp0cnVlLCJBdXJvcmEgZm9yIE15U1FMIjp0cnVlLCJBdXJvcmEgZm9yIFBvc3RncmVTUUwiOnRydWUsIkJ5Q29uaXR5Ijp0cnVlLCJCeXRlSG91c2UiOnRydWUsImNoREIgKERhdGFGcmFtZSkiOnRydWUsImNoREIgKFBhcnF1ZXQsIHBhcnRpdGlvbmVkKSI6dHJ1ZSwiY2hEQiI6dHJ1ZSwiQ2l0dXMiOnRydWUsIkNsaWNrSG91c2UgQ2xvdWQgKGF3cykiOnRydWUsIkNsaWNrSG91c2UgQ2xvdWQgKGF3cykgUGFyYWxsZWwgUmVwbGljYXMgT04iOnRydWUsIkNsaWNrSG91c2UgQ2xvdWQgKEF6dXJlKSI6dHJ1ZSwiQ2xpY2tIb3VzZSBDbG91ZCAoQXp1cmUpIFBhcmFsbGVsIFJlcGxpY2EgT04iOnRydWUsIkNsaWNrSG91c2UgQ2xvdWQgKEF6dXJlKSBQYXJhbGxlbCBSZXBsaWNhcyBPTiI6dHJ1ZSwiQ2xpY2tIb3VzZSBDbG91ZCAoZ2NwKSI6dHJ1ZSwiQ2xpY2tIb3VzZSBDbG91ZCAoZ2NwKSBQYXJhbGxlbCBSZXBsaWNhcyBPTiI6dHJ1ZSwiQ2xpY2tIb3VzZSAoZGF0YSBsYWtlLCBwYXJ0aXRpb25lZCkiOnRydWUsIkNsaWNrSG91c2UgKGRhdGEgbGFrZSwgc2luZ2xlKSI6dHJ1ZSwiQ2xpY2tIb3VzZSAoUGFycXVldCwgcGFydGl0aW9uZWQpIjp0cnVlLCJDbGlja0hvdXNlIChQYXJxdWV0LCBzaW5nbGUpIjp0cnVlLCJDbGlja0hvdXNlICh3ZWIpIjp0cnVlLCJDbGlja0hvdXNlIjp0cnVlLCJDbGlja0hvdXNlICh0dW5lZCkiOnRydWUsIkNsaWNrSG91c2UgKHR1bmVkLCBtZW1vcnkpIjp0cnVlLCJDbG91ZGJlcnJ5Ijp0cnVlLCJDcmF0ZURCIjp0cnVlLCJDcnVuY2h5IEJyaWRnZSBmb3IgQW5hbHl0aWNzIChQYXJxdWV0KSI6dHJ1ZSwiRGF0YWJlbmQiOnRydWUsIkRhdGFGdXNpb24gKFBhcnF1ZXQsIHBhcnRpdGlvbmVkKSI6dHJ1ZSwiRGF0YUZ1c2lvbiAoUGFycXVldCwgc2luZ2xlKSI6dHJ1ZSwiQXBhY2hlIERvcmlzIjp0cnVlLCJEcnVpZCI6dHJ1ZSwiRHVja0RCIChEYXRhRnJhbWUpIjp0cnVlLCJEdWNrREIgKFBhcnF1ZXQsIHBhcnRpdGlvbmVkKSI6dHJ1ZSwiRHVja0RCIjp0cnVlLCJFbGFzdGljc2VhcmNoIjp0cnVlLCJFbGFzdGljc2VhcmNoICh0dW5lZCkiOmZhbHNlLCJHbGFyZURCIjp0cnVlLCJHcmVlbnBsdW0iOnRydWUsIkhlYXZ5QUkiOnRydWUsIkh5ZHJhIjp0cnVlLCJJbmZvYnJpZ2h0Ijp0cnVlLCJLaW5ldGljYSI6dHJ1ZSwiTWFyaWFEQiBDb2x1bW5TdG9yZSI6dHJ1ZSwiTWFyaWFEQiI6ZmFsc2UsIk1vbmV0REIiOnRydWUsIk1vbmdvREIiOnRydWUsIk1vdGhlcmR1Y2siOnRydWUsIk15U1FMIChNeUlTQU0pIjp0cnVlLCJNeVNRTCI6dHJ1ZSwiT3hsYSI6dHJ1ZSwiUGFuZGFzIChEYXRhRnJhbWUpIjp0cnVlLCJQYXJhZGVEQiAoUGFycXVldCwgcGFydGl0aW9uZWQpIjp0cnVlLCJQYXJhZGVEQiAoUGFycXVldCwgc2luZ2xlKSI6dHJ1ZSwiUGlub3QiOnRydWUsIlBvbGFycyAoRGF0YUZyYW1lKSI6dHJ1ZSwiUG9zdGdyZVNRTCAodHVuZWQpIjpmYWxzZSwiUG9zdGdyZVNRTCI6dHJ1ZSwiUXVlc3REQiAocGFydGl0aW9uZWQpIjp0cnVlLCJRdWVzdERCIjp0cnVlLCJSZWRzaGlmdCI6dHJ1ZSwiU2luZ2xlU3RvcmUiOnRydWUsIlNub3dmbGFrZSI6dHJ1ZSwiU1FMaXRlIjp0cnVlLCJTdGFyUm9ja3MiOnRydWUsIlRhYmxlc3BhY2UiOnRydWUsIlRlbWJvIE9MQVAgKGNvbHVtbmFyKSI6dHJ1ZSwiVGltZXNjYWxlREIgKGNvbXByZXNzaW9uKSI6dHJ1ZSwiVGltZXNjYWxlREIiOnRydWUsIlVtYnJhIjp0cnVlfSwidHlwZSI6eyJDIjp0cnVlLCJjb2x1bW4tb3JpZW50ZWQiOnRydWUsIlBvc3RncmVTUUwgY29tcGF0aWJsZSI6dHJ1ZSwibWFuYWdlZCI6dHJ1ZSwiZ2NwIjp0cnVlLCJzdGF0ZWxlc3MiOnRydWUsIkphdmEiOnRydWUsIkMrKyI6dHJ1ZSwiTXlTUUwgY29tcGF0aWJsZSI6dHJ1ZSwicm93LW9yaWVudGVkIjp0cnVlLCJDbGlja0hvdXNlIGRlcml2YXRpdmUiOnRydWUsImVtYmVkZGVkIjp0cnVlLCJzZXJ2ZXJsZXNzIjp0cnVlLCJkYXRhZnJhbWUiOnRydWUsImF3cyI6dHJ1ZSwicGFyYWxsZWwgcmVwbGljYXMiOnRydWUsIkF6dXJlIjp0cnVlLCJhbmFseXRpY2FsIjp0cnVlLCJSdXN0Ijp0cnVlLCJzZWFyY2giOnRydWUsImRvY3VtZW50Ijp0cnVlLCJzb21ld2hhdCBQb3N0Z3JlU1FMIGNvbXBhdGlibGUiOnRydWUsInRpbWUtc2VyaWVzIjp0cnVlfSwibWFjaGluZSI6eyIxNiB2Q1BVIDEyOEdCIjp0cnVlLCI4IHZDUFUgNjRHQiI6dHJ1ZSwic2VydmVybGVzcyI6dHJ1ZSwiMTZhY3UiOnRydWUsImM2YS40eGxhcmdlLCA1MDBnYiBncDIiOnRydWUsIkwiOnRydWUsIk0iOnRydWUsIlMiOnRydWUsIlhTIjp0cnVlLCJjNmEubWV0YWwsIDUwMGdiIGdwMiI6dHJ1ZSwiMTkyR0IiOnRydWUsIjI0R0IiOnRydWUsIjM2MEdCIjp0cnVlLCI0OEdCIjp0cnVlLCI3MjBHQiI6dHJ1ZSwiOTZHQiI6dHJ1ZSwiMTQzMEdCIjp0cnVlLCJkZXYiOnRydWUsIjcwOEdCIjp0cnVlLCJjNW4uNHhsYXJnZSwgNTAwZ2IgZ3AyIjp0cnVlLCJBbmFseXRpY3MtMjU2R0IgKDY0IHZDb3JlcywgMjU2IEdCKSI6dHJ1ZSwiYzUuNHhsYXJnZSwgNTAwZ2IgZ3AyIjp0cnVlLCJjNmEuNHhsYXJnZSwgMTUwMGdiIGdwMiI6dHJ1ZSwiY2xvdWQiOnRydWUsImRjMi44eGxhcmdlIjp0cnVlLCJyYTMuMTZ4bGFyZ2UiOnRydWUsInJhMy40eGxhcmdlIjp0cnVlLCJyYTMueGxwbHVzIjp0cnVlLCJTMiI6dHJ1ZSwiUzI0Ijp0cnVlLCIyWEwiOnRydWUsIjNYTCI6dHJ1ZSwiNFhMIjp0cnVlLCJYTCI6dHJ1ZSwiTDEgLSAxNkNQVSAzMkdCIjp0cnVlLCJjNmEuNHhsYXJnZSwgNTAwZ2IgZ3AzIjp0cnVlfSwiY2x1c3Rlcl9zaXplIjp7IjEiOnRydWUsIjIiOnRydWUsIjQiOnRydWUsIjgiOnRydWUsIjE2Ijp0cnVlLCIzMiI6dHJ1ZSwiNjQiOnRydWUsIjEyOCI6dHJ1ZSwic2VydmVybGVzcyI6dHJ1ZSwiZGVkaWNhdGVkIjp0cnVlfSwibWV0cmljIjoic2l6ZSIsInF1ZXJpZXMiOlt0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlLHRydWUsdHJ1ZSx0cnVlXX0=). 
 
-> If you use Iceberg Tables, you can use the same table in all the data warehouses. It helps to pay for the storage only once in your cloud provider and ignore paying the prioritary cost of storage.
-
-<table class="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
-  <thead class="bg-slate-50 dark:bg-slate-700">
-    <tr>
-      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left"></th>
-      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Storage pricing</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Snowflake</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Warehouse ([$2 / hour](https://www.snowflake.com/en/data-cloud/pricing-options/)) </td>
-    </tr>
-    <tr>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Athena</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Headless</td>
-    </tr>
-    <tr>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Redshift Serverless</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
-    </tr>
-    <tr>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Google BigQuery</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[$2 / hour]()</td>
-    </tr>
-    <tr>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Databricks</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">DBU ($2.8 / hour), on-demand + spot instances</td>
-    </tr>
-  </tbody>
-</table>
+> If you use Iceberg Tables, you can use the same table in all the data warehouses.
 
 ### Compute cost
 
@@ -67,27 +39,27 @@ Decoupling storage from compute is important because unless you have an anti-pat
   </thead>
   <tbody>
     <tr>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Snowflake</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Snowflake](/blog/part-1-compare-data-warehouse-pricing-model/#snowflake)</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Warehouse ([$2 / hour](https://www.snowflake.com/en/data-cloud/pricing-options/)) </td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">-</td>
     </tr>
     <tr>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Athena</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[AWS Athena](/blog/part-1-compare-data-warehouse-pricing-model/#aws-athena)</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">-</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"> Data scanned ($5) </td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Data scanned]() ($5) </td>
     </tr>
     <tr>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Redshift Serverless</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[AWS Redshift Serverless](/blog/part-1-compare-data-warehouse-pricing-model/#aws-redshift-serverless)</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[RPUs](https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-capacity.html)( [$3.65](https://aws.amazon.com/redshift/pricing/#Amazon_Redshift_Serverless) / hour)</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">-</td>
     </tr>
     <tr>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Google BigQuery</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Slots ([$2 / hour](https://aws.amazon.com/redshift/pricing/#Amazon_Redshift_Serverless) )</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Google BigQuery](/blog/part-1-compare-data-warehouse-pricing-model/#google-bigquery)</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Slots ($2 / hour)</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Data scanned ($6.25)</td>
     </tr>
     <tr>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Databricks</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Databricks](/blog/part-1-compare-data-warehouse-pricing-model/#databricks)</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">DBU ($2.8 / hour)</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">-</td>
     </tr>
@@ -99,10 +71,12 @@ Decoupling storage from compute is important because unless you have an anti-pat
 
 Considering you use a cloud provider already and store your data in there, they incur egress/ingress if you're transferring the data in between different regions. 
 If you don't use compression or use row-oriented formats such as CSV, JSON instead of columnar formats such as Parquet, ORC both storage and data transfer cost will be significantly higher.
+However; the native data formats in data warehouses use columnar formats which are more efficient in terms of storage and data transfer.
 
-### Performance
+### Performance Impact on Query Engine
 
-Also keep in mind that the recent findings show that the compute performance highly varies based on the workload. 
+Also keep in mind that the recent findings show that the compute performance highly varies based on the workloads.
+It's easier to get the data into Snowflake but the transformation is expensive.
 
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Snowflake and Redshift have both published representative samples of real-world queries, and the way people actually use these systems is INTERESTING. The main workload is ingest and transformation! <a href="https://t.co/GgnYOfxVtO">pic.twitter.com/GgnYOfxVtO</a></p>&mdash; George Fraser (@frasergeorgew) <a href="https://twitter.com/frasergeorgew/status/1836117416902037547?ref_src=twsrc%5Etfw">September 17, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -153,7 +127,7 @@ The pricing is based on DBU, Databricks Unit. The minimum cost is [$0.07](https:
 ![Compare tables](/images/blog/dwh/databricks_warehouse_page.png)
 
 
-## BigQuery
+## Google BigQuery
 
 BigQuery has two pricing models, by default it's [demand based pricing](<[Demand-based pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing)>), which is simply TBs scanned for the query. While you can get a great performance, it comes at a cost. Your innocent query `select * from fact_table limit 1` can end up processing TBs of data if you're not careful but luckily BigQuery console provides you with some stats before running the query.
 
@@ -174,7 +148,9 @@ It's also worth that BigQuery is the only warehouse that supports both TBs scann
 * [This VM did not have enough memory to run all queries.](https://arxiv.org/html/2408.00253v1#bib.bib64:~:text=This%20VM%20did%20not%20have) 
 * [How do people use Snowflake and Redshift?](https://www.fivetran.com/blog/how-do-people-use-snowflake-and-redshift)
 
-### What's next? 
+### So What?
+
+The pricing for data
 
 Next up, we are:
 
