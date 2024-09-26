@@ -39,8 +39,8 @@ In this post, we will compare the (advanced) features of the data warehouses.
     </tr>
     <tr>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**HTAP**</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"> UniStore ❔</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Aurora Integration </td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"> [Hybrid Tables](https://quickstarts.snowflake.com/guide/getting_started_with_hybrid_tables/#8) ❔</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Glue to Aurora], [Zero-ETL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.creating.html#zero-etl.create) </td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">GCP SQL + BigTable Integrations</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">-</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">RDS Integration</td>
@@ -54,11 +54,11 @@ In this post, we will compare the (advanced) features of the data warehouses.
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
     </tr>
     <tr>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Data Sharing**</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Data Sharing Capabilities**</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Secure Share</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Clean Rooms</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Delta Sharing</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Delta Sharing](https://www.databricks.com/product/delta-sharing)</td>
             <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
 
     </tr>
@@ -80,19 +80,27 @@ In this post, we will compare the (advanced) features of the data warehouses.
     </tr>
     <tr>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Bring your code**</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">5️⃣</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">3️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Containers, Pandas, Python / Javascript5️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Containers, Spark via Dataproc2️⃣</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">4️⃣</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">5️⃣</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Data Source Connectors](https://docs.aws.amazon.com/athena/latest/ug/running-federated-queries.html) 3️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Spark 5️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Spark, [Data Source Connectors](https://docs.aws.amazon.com/athena/latest/ug/running-federated-queries.html) 3️⃣</td>
     </tr>
     <tr>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Catalog**</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Polaris](https://docs.snowflake.com/en/user-guide/tables-iceberg-configure-catalog-integration-rest) (Apache Iceberg), [AWS Glue](https://docs.snowflake.com/en/user-guide/tables-iceberg-configure-catalog-integration-glue)</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Glue</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[AWS Glue](https://cloud.google.com/bigquery/docs/glue-federated-datasets), Google Data Catalog4️⃣</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Delta Lake 2️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Polaris](https://docs.snowflake.com/en/user-guide/tables-iceberg-configure-catalog-integration-rest) (Apache Iceberg), [AWS Glue](https://docs.snowflake.com/en/user-guide/tables-iceberg-configure-catalog-integration-glue), Snowflake 4️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[AWS Glue](https://aws.amazon.com/about-aws/whats-new/2023/07/aws-glue-studio-amazon-redshift-serverless/) 3️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[AWS Glue](https://cloud.google.com/bigquery/docs/glue-federated-datasets), BigQuery, Google Data Catalog4️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Delta Lake](https://docs.databricks.com/en/delta/index.html), Apache Iceberg 5️⃣</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Glue 3️⃣</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Marketplace**</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[3K listing](https://app.snowflake.com/marketplace), most advanced 5️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[5K listing](https://aws.amazon.com/marketplace) 4️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[3.5K listing](https://console.cloud.google.com/marketplace?hl=en) 3️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[2.5K listing](https://marketplace.databricks.com/?sortBy=date), most advanced 5️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[5K listing](https://aws.amazon.com/marketplace)4️⃣</td>
     </tr>
     <tr>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Best for 🦄**</td>
@@ -209,21 +217,29 @@ I must admit that it also feels weird to call an API to create datasets, which c
 ## Most flexible: Databricks
 
 Databricks's onboarding experience is among the worst I had, primarily because I don't have much Spark experience. 
+Their BYOC approach (Bring your own cloud) is a good idea but it's not as easy as it sounds. You need to have a good understanding of Spark and Databricks to use it effectively.
 
-### BYOC (Bring your own cloud)
-
-Databricks runs on Spark, one of the most popular data processing engines. It's a natural choice if you're already using Spark, on your own cloud. All the compute happens in your own environment with Databricks, 
+Databricks runs on Spark, one of the most popular data processing engines. It's a natural choice if you're already using Spark, on your own cloud. 
+All the compute happens in your own environment with Databricks and you have full transparency. 
 
 ## Cool again: Redshift Serverless
-
-### Comeback from Redshift
 
 Years ago when Redshift came out in 2012, it revotionlized the data warehouse ecosystem because it was a huge boost from Hadoop to Redshift. However; over the last 10 years, its competitor Snowflake was eating Redshift's lunch. 
 Even Redshift sales people were selling Snowflake to their customers, probably because it's clearly a better a product and AWS makes money from Snowflake anyway for compute. 
 
-However; given that companies need to sign another contract with Snowflake, 
+Redshift Serverless feels like a comeback frod Redshift. Given that companies need to sign another contract with Snowflake, if they're already on AWS, Redshift Serverless is a natural choice today.
 
 ## Easiest to start with: AWS Athena
 
 AWS Athena is using AWS Glue as Data Catalog and it's a serverless data warehouse on the AWS data and Iceberg tables.
 It can create tables but it's not feature-rich as its competitors. That makes it a natural choice if you're on AWS and need something quick and easy to use.
+
+### TLDR
+
+* If you're on AWS, using Glue will give you the option to use both Athena, Redshift Serverless, Snowflake, and BigQuery. 
+Athena is the easiest to start with on AWS and you can switch over Redshift Serverless over time.
+* If you're on GCP, BigQuery is probably the best option for you.
+* If you're cross cloud:
+	* Snowflake is the best option for you if you have SQL-familiar people like analysts and analytics engineers.
+	* Databricks is the best option for you if you have data engineers and data scientists, focusing on ML. 
+	* If you're expanding to AWS from GCP, BigQuery is still worth investing in.
