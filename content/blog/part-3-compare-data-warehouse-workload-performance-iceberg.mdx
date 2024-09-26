@@ -1,0 +1,82 @@
+---
+title: "Part 3: Comparing performance of data warehouses on Iceberg Tables"
+publishedAt: '2024-09-24'
+isPublished: false
+tags: ['meta']
+description: Compare DuckDB and Apache DataFusion to choose the right tool for your data processing needs.
+toc: false
+---
+
+
+# Catalog Support
+
+<table class="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
+  <thead class="bg-slate-50 dark:bg-slate-700">
+    <tr>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left"></th>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Read Support</th>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Write Support</th>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Catalog Support</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Snowflake</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Warehouse ([$2 / hour](https://www.snowflake.com/en/data-cloud/pricing-options/)) </td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Athena</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Headless</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Redshift Serverless</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Google BigQuery</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[$2 / hour]()</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Databricks</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">DBU ($2.8 / hour), on-demand + spot instances</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Bonus: DuckDB</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">DBU ($2.8 / hour), on-demand + spot instances</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## Snowflake
+
+## BigQuery
+
+## Redshift Serverless
+
+## Databricks
+
+
+# Consideration for workloads
+
+Just the other day I found out about @'s tweet:
+
+When you 
+
+# Testing
+
+
+
+
+
+With the recent developments of all these data warehouses to support Apache Iceberg, it became easier to do benchmarking on the same datasets though. You can simply use the same Iceberg table and mount them into all of these warehouses and compare the cost based on their pricing model.
+
+### What's next? 
+
+Next up, we will compare the pricing with performance and feature set of these data warehouses:
+
+* [Part 3: Comparing features of data warehouses](/blog/part-3-compare-data-warehouse-features)
+
+
+
+

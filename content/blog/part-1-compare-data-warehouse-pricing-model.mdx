@@ -1,0 +1,185 @@
+---
+title: "Part 1: Comparing pricing model of data warehouses"
+publishedAt: '2024-09-10'
+isPublished: true
+tags:
+  - data-warehouse
+  - universql
+description: Comparing pricing models in Snowflake, BigQuery, Redshift Serverless and Databricks
+toc: false
+---
+
+While I'm developing [Universql](https://github.com/buremba/universql), I had a chance to learn more about the up-to-date comparison of data warehouses. It's hard to do benchmarks for databases, but it's harder to do comparisons on their pricing. There are 3 major things you need to consider:
+
+## Considerations
+
+### Storage cost
+
+Often providers such as Redshift and Snowflake use their own proprietary database formats so while the pricing is based on the data volume, it's hard to estimate how much data space you will need before actually using them. 
+
+> If you use Iceberg Tables, you can use the same table in all the data warehouses. It helps to pay for the storage only once in your cloud provider and ignore paying the prioritary cost of storage.
+
+<table class="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
+  <thead class="bg-slate-50 dark:bg-slate-700">
+    <tr>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left"></th>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Storage pricing</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Snowflake</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Warehouse ([$2 / hour](https://www.snowflake.com/en/data-cloud/pricing-options/)) </td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Athena</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Headless</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Redshift Serverless</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Google BigQuery</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[$2 / hour]()</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Databricks</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">DBU ($2.8 / hour), on-demand + spot instances</td>
+    </tr>
+  </tbody>
+</table>
+
+### Compute cost
+
+Some charge based on the data your query processed, and some charge based on the compute units you use under the hood (warehouse, slot, etc.)
+The performance for specific operations such as ingestion, transformation, querying small tables vs big tables, the use of specific SQL syntax such as WINDOW functions have huge impact on the cost due to the way underlying engines implement them. Also, the performance/cost changes over time with the software updates. 
+
+Decoupling storage from compute is important because unless you have an anti-pattern use-case, the most expensive pillar (> 90%) is the compute cost in all the data warehouses. While For compute, here is the terminology they use for compute:
+
+<table class="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
+  <thead class="bg-slate-50 dark:bg-slate-700">
+    <tr>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left"></th>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Compute Capacity / Minimum cost of unit</th>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Data Processing / Price per TB</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Snowflake</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Warehouse ([$2 / hour](https://www.snowflake.com/en/data-cloud/pricing-options/)) </td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">-</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Athena</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">-</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"> Data scanned ($5) </td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Redshift Serverless</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[RPUs](https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-capacity.html)( [$3.65](https://aws.amazon.com/redshift/pricing/#Amazon_Redshift_Serverless) / hour)</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">-</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Google BigQuery</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Slots ([$2 / hour](https://aws.amazon.com/redshift/pricing/#Amazon_Redshift_Serverless) )</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Data scanned ($6.25)</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Databricks</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">DBU ($2.8 / hour)</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">-</td>
+    </tr>
+  </tbody>
+</table>
+
+
+### Data Transfer
+
+Considering you use a cloud provider already and store your data in there, they incur egress/ingress if you're transferring the data in between different regions. 
+If you don't use compression or use row-oriented formats such as CSV, JSON instead of columnar formats such as Parquet, ORC both storage and data transfer cost will be significantly higher.
+
+### Performance
+
+Also keep in mind that the recent findings show that the compute performance highly varies based on the workload. 
+
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Snowflake and Redshift have both published representative samples of real-world queries, and the way people actually use these systems is INTERESTING. The main workload is ingest and transformation! <a href="https://t.co/GgnYOfxVtO">pic.twitter.com/GgnYOfxVtO</a></p>&mdash; George Fraser (@frasergeorgew) <a href="https://twitter.com/frasergeorgew/status/1836117416902037547?ref_src=twsrc%5Etfw">September 17, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+## Snowflake
+
+### Warehouse
+
+Snowflake uses Warehouses for hardware abstraction. They are mapped to EC2 instances on AWS, VM machines on GCP and Azure. They scale both horizontally and vertically as you run queries on these warehouses and auto-start & auto-suspend based on your configuration. While one warehouse can run multiple queries simultaneously, queries try to use the resources as much as possible.
+
+The cost is fairly predictable because warehouse concept let's you tune in between latency and performance. If you want to run queries 2x efficiently, just switch to bigger warehouse (ex: from `x-small` to `small`)
+
+On the flip side, you pay for the warehouse during auto-suspend and your queries suffer 1-2 seconds of latency for the auto-start. Even if you run a query takes takes 5 seconds to run, you pay for a warehouse 60 seconds at minimum so you often need to optimize your warehouse as you scale. This work is non-trivial if you're not familiar with Snowflake and there are even startups (Select.dev, Keebola etc.) that help you optimize your warehouse usage. 
+
+Snowflake charges based on credits, which costs [$2]() today. (2024-09) You can scale in or out (multi-clusters), by giving you the flexibility to tune your workload. Here are Snowflake [warehouse types](https://docs.snowflake.com/en/user-guide/warehouses-overview#warehouse-size):
+
+Snowflake has [Streams](https://docs.snowflake.com/en/user-guide/streams-intro) and [Tasks](https://docs.snowflake.com/en/user-guide/tasks-intro), which let you create workflows based on event and time-based triggers. For incremental processing, you have these options:
+
+![Compare tables](/images/blog/dwh/snowflake_warehouse_create.png)
+
+> Snowflake doesn't offer any discount for the reserved capacity but offers a discount for the credits you buy in advance depending on your negotiation. You can use your AWS, Azure, and GCP credits to pay for Snowflake.
+
+### Snowflake Serverless tasks
+
+Snowflake has Serverless Tasks feature, which automatically provisions warehouses under the hood for you to scale as your query gets more expensive. It costs 0.9x of the warehouse cost for the same duration. Keep in mind that a single warehouse can run multiple queries concurrently on Snowflake so it's indeed more expensive than using warehouses.
+
+In order to use Serverless Tasks, you need to create a task, using `CREATE TASK` syntax. Tasks are suitable if you would like to run the same query based on an internal as a workflow but Snowflake doesn't support serverless model for typical `SELECT` queries. I believe soon enough they will release such feature to keep up with the competition.
+
+## AWS Redshift Serverless
+
+Redshift Serverless is AWS's new product, superseding Redshift we know of. It decouples storage from compute and has native integration with S3. I didn't include AWS Athena to the comparison because Redshift Serverless seems to outperform Athena.
+
+You need create a workspace, defining base capacity [RPUs](https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-capacity.html) based on your allocations. The minimum for base is 8, which costs and the RPU price is [$0.467](https://aws.amazon.com/redshift/pricing/?nc=sn&loc=3), which makes $3.65 per hour. 
+
+While it's serverless, Redshift charges you a minimum of 60 seconds when you start using the compute. It's similar to Snowflake in that sense. It scales to zero when you don't query the tables.
+
+![Compare tables](/images/blog/dwh/redshift_serverless_workload.png)
+
+## AWS Athena
+
+## Databricks
+
+Databricks uses the BYOC (Bring-your-cloud) model. 
+You install Databricks in your cloud provider, and it provisions a Kubernetes cluster for you. It runs a minimum of 4 nodes in the cluster even if you don't use it so it doesn't scale to zero unlike all the other options. 
+The pricing is based on DBU, Databricks Unit. The minimum cost is [$0.07](https://databricks.com/pricing) per DBU, which makes $2.8 per hour.
+
+![Compare tables](/images/blog/dwh/databricks_warehouse_page.png)
+
+
+## BigQuery
+
+BigQuery has two pricing models, by default it's [demand based pricing](<[Demand-based pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing)>), which is simply TBs scanned for the query. While you can get a great performance, it comes at a cost. Your innocent query `select * from fact_table limit 1` can end up processing TBs of data if you're not careful but luckily BigQuery console provides you with some stats before running the query.
+
+With [Capacity-based pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing), you can allocate slots for your BigQuery project and they threshold the CPU time used at a given interval. I would like to think of slots at the CPU units. It's cost-efficient compared to Snowflake, due to BigQuery's autoscaler.
+
+![Snnowflake warehouse vs BigQuery slots](/images/blog/dwh/bigquery_utilization.png)
+
+The minimum reservation is 50 slots, with the current price (2024-09, [$0.04](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing)), the minimum cost unit is **$2 / hour** if you run it a full hour. You don't need to worry about things like cold start performance issues or optimizing warehouse usage. 
+Each query consumes the capacity defined for the project you have the reservation. It perfectly scales to zero when the tables are not queried.
+
+![Compare tables](/images/blog/dwh/bigquery_reservations.png)
+
+It's also worth that BigQuery is the only warehouse that supports both TBs scanned and hardware based pricing.
+
+
+## Related Work
+
+* [This VM did not have enough memory to run all queries.](https://arxiv.org/html/2408.00253v1#bib.bib64:~:text=This%20VM%20did%20not%20have) 
+* [How do people use Snowflake and Redshift?](https://www.fivetran.com/blog/how-do-people-use-snowflake-and-redshift)
+
+### What's next? 
+
+Next up, we are:
+
+* [Part 2: Comparing features of data warehouses](/blog/part-2-compare-data-warehouse-features)
+
+
+
+

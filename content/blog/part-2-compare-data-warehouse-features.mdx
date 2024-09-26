@@ -1,0 +1,229 @@
+---
+title: "Part 2: Comparing features and developer experience of data warehouses"
+publishedAt: '2024-09-27'
+isPublished: true
+tags: ['meta']
+description: Compare DuckDB and Apache DataFusion to choose the right tool for your data processing needs.
+toc: false
+---
+
+
+If you haven't seen yet, here are the previous:
+
+* [Part 1: Comparing performance of data warehouses on Iceberg Tables](/blog/part-2-compare-data-warehouse-workload-performance-iceberg)
+* [Part 2: Comparing features of data warehouses](/blog/part-3-compare-data-warehouse-features)
+
+In this post, we will compare the (advanced) features of the data warehouses.
+
+## Features 
+
+<table class="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
+  <thead class="bg-slate-50 dark:bg-slate-700">
+    <tr>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left"></th>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Snowflake</th>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">AWS Redshift Serverless</th>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Google BigQuery</th>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Databricks</th>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">[AWS Athena](./#fsdf)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Streaming**</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Streams, <a href="https://docs.snowflake.com/en/user-guide/dynamic-tables-about">Dynamic Tables 5️⃣</a></td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Materialized tables 4️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Materialized table, Continuous query 4️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Delta Tables 5️⃣❔</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">-</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**HTAP**</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">UniStore ❔</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Aurora Integration </td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">GCP SQL + BigTable Integrations</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">-</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">RDS Integration</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Scheduling**</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Tasks 5️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Crons</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Data Sharing**</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Secure Share</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Clean Rooms</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Delta Sharing</td>
+            <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
+
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Cloud**</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS, GCP, Azure</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">GCP, AWS</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS, GCP, Azure</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Cross Region in the Cloud**</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Auto Replication</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400"></td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Query Across Region](https://docs.aws.amazon.com/athena/latest/ug/querying-across-regions.html)</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Bring your code**</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">5️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">3️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">4️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">5️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Data Source Connectors](https://docs.aws.amazon.com/athena/latest/ug/running-federated-queries.html) 3️⃣</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Catalog**</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Polaris (Apache Iceberg)</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Glue</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Glue, Google Data Catalog4️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Delta Lake 2️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">AWS Glue 3️⃣</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Best for 🦄**</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[SQL-for-everything](./#sql-for-everything), analytics engineers</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">getting serious on AWS</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">already on GCP</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Non-SQL / ML workloads, data engineers</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">starting on AWS</td>
+    </tr>
+    </tbody>
+</table>
+
+## Experience
+
+<table class="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
+  <thead class="bg-slate-50 dark:bg-slate-700">
+    <tr>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left"></th>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Snowflake</th>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">AWS Redshift (S)</th>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Google BigQuery</th>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">Databricks</th>
+      <th class="border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left">[AWS Athena](./#fsdf)</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Maintenance**</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">5️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">3️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">4️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">5️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">3️⃣</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Onboarding**</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">5️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">3️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">4️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">2️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">5️⃣</td>
+    </tr>
+    <tr>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">**Ecosystem**</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">5️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">3️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">4️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">2️⃣</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">5️⃣</td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+## Best overall: Snowflake ❄️
+
+### Accounts
+
+To run queries on Snowflake, you need to create an account. Snowflake accounts are within a region in your cloud provider so you can't have two tables in different regions / cloud providers in a single account. This design is mainly to isolate the unexpected egress costs in cloud providers, they rather advice auto replication feature which makes sure the data is copied only once in different regions. 
+
+### SQL-for-everything
+Snowflake provides SQL support for the resources, which I love. You create accounts, provision warehouses, run Kubernetes, (it's weird to write YML in SQL though) and share data just with SQL. Their syntax is consistent, rich, and well-documented. Their `CREATE [whatever]` can provide a very convenient onboarding experience for newcomers. You don't need to dig into specific REST API documentation or deal with authentication. 
+
+### Connects all clouds
+
+* You can bring your Python / Javascript and map them as user-defined ([scalar](https://docs.snowflake.com/en/developer-guide/udf/python/udf-python-batch), [table](https://docs.snowflake.com/en/developer-guide/udf/python/udf-python-tabular-functions), [aggregate](https://docs.snowflake.com/en/developer-guide/udf/python/udf-python-aggregate-functions)) functions
+* Snowflake [scales out Pandas](https://docs.snowflake.com/en/developer-guide/snowpark/python/pandas-on-snowflake), as an alternative to Databricks's PySpark.
+* You can connect to your cloud (Google Cloud Functions, AWS Lambda, etc.) [external functions](https://docs.snowflake.com/en/sql-reference/external-functions-introduction).
+* You can run Docker images inside your account with [Container Services](https://docs.snowflake.com/en/developer-guide/snowpark-container-services/overview).
+* Snowflake has [Streams](https://docs.snowflake.com/en/user-guide/streams-intro) and [Tasks](https://docs.snowflake.com/en/user-guide/tasks-intro), which let you create workflows based on event and time-based triggers. For incremental processing, you have these options:
+
+![Compare tables](/images/blog/dwh/snowflake/mv_vs_dynamic_tables.png)
+
+
+### First-class data application experience
+
+Snowflake [Native Application Framework](https://docs.snowflake.com/en/developer-guide/native-apps/native-apps-about) lets you process and share data between your partners, which powers their Marketplace offering. The experience is superior to AWS and GCP Marketplace.
+Snowflake Marketplace has around [3000 listings](https://app.snowflake.com/marketplace/data-products) today (2024-09).
+
+## Hidden Gem: BigQuery
+
+I believe BigQuery is the most underrated data warehouse. It was built upon Google's modern infrastructure years ago and can run on other clouds such as AWS via Omni. It would be a standalone product outside of GCP, it would probably succeed more as a product.
+
+Snowflake's major cloud provider support is AWS and BigQuery is indeed a big competitor of Snowflake but selling BigQuery outside of the GCP ecosystem is touch as it's highly coupled with GCP internals. 
+
+### Goodbye databases, hello projects
+
+BigQuery doesn't have the database/schema / table hierarchy unlike most of the traditional and modern data warehouses. Your GCP project is your database and you use a non-SQL API to create datasets. Under the dataset, you can create tables but you can't create schemas via SQL. Here is how the full qualifier of your tables:
+
+```sql
+select * from `gcp-project`.`dataset-name`.`table-name`
+```
+For the people who are coming from the Hive / Hadoop or RDBMS world, this is weird and I believe it caused a lot of friction for many people.
+I must admit that it also feels weird to call an API to create datasets, which correspond to schemas in databases. I would rather use `CREATE SCHEMA ..` syntax rather than 
+
+### BigQuery as cross-cloud data warehouse
+
+
+
+### Ecosystem
+
+* Google Marketplace provides ways to share data with partners but BigQuery doesn't provide an application framework to build and deploy apps in a way advanced as Snowflake and Databricks. 
+* BigQuery integrates well with most GCP products and your Google Workspace data, which makes it a natural choice in the Google ecosystem.
+
+### Connectivity
+
+* You can bring your Javascript and map them as user-defined ([scalar](https://cloud.google.com/bigquery/docs/user-defined-functions), [table](https://cloud.google.com/bigquery/docs/table-functions),[aggregate](https://cloud.google.com/bigquery/docs/user-defined-aggregates)) functions
+* BigQuery [run Spark procedures via Dataproc](https://cloud.google.com/bigquery/docs/spark-procedures), managed Spark cluster from GCP.
+* You can connect to your Google Cloud Functions and run containers on Cloud Run via [remote functions]([https://docs.snowflake.com/en/sql-reference/external-functions-introduction](https://cloud.google.com/bigquery/docs/remote-functions)).
+* You can connect **cross-cloud data** on AWS and Azure via [Omni](https://cloud.google.com/bigquery/docs/omni-introduction) which doesn't incur any egress cost as Google runs BigQuery natively in your cloud provider.
+* You can connect most of your GCP data in and out for building workflows, using [BigTable](https://cloud.google.com/bigquery/docs/create-bigtable-external-table?hl=en0) and [PubSub](https://cloud.google.com/bigquery/docs/export-to-pubsub) integrations.
+* You can connect your Google data including [spreadsheets](https://cloud.google.com/bigquery/docs/connected-sheets) and [Google Drive](https://cloud.google.com/bigquery/docs/external-data-drive?hl=en).
+* You can use materialized views and continuous queries to create streaming / incremental data pipelines. 
+
+## Databricks
+
+Databricks's onboarding experience is among the worst I had, primarily because I don't have much Spark experience. 
+
+### BYOC (Bring your own cloud)
+
+Databricks runs on Spark, one of the most popular data processing engines. It's a natural choice if you're already using Spark, on your own cloud. All the compute happens in your own environment with Databricks, 
+
+## Redshift Serverless
+
+### Comeback from Redshift
+
+Years ago when Redshift came out in 2012, it revotionlized the data warehouse ecosystem because it was a huge boost from Hadoop to Redshift. However; over the last 10 years, its competitor Snowflake
+
+
+## AWS Athena
+
+AWS Athena is using AWS Glue as Data Catalog and it's a serverless data warehouse on the AWS data and Iceberg tables.
+It can create tables but it's not feature-rich as its competitors. That makes it a natural choice if you're on AWS and need something quick and easy to use.
