@@ -50,12 +50,12 @@ Decoupling storage from compute is important because unless you have an anti-pat
     </tr>
     <tr>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[AWS Redshift Serverless](/blog/part-1-compare-data-warehouse-pricing-model/#aws-redshift-serverless)</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[RPUs](https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-capacity.html)( [$3.65](https://aws.amazon.com/redshift/pricing/#Amazon_Redshift_Serverless) / hour)</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[RPUs](https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-capacity.html)( $3.65 / hour)</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">-</td>
     </tr>
     <tr>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Google BigQuery](/blog/part-1-compare-data-warehouse-pricing-model/#google-bigquery)</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Slots ($2 / hour)</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Slots](https://cloud.google.com/bigquery/docs/slots) ($2 / hour)</td>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">Data scanned ($6.25)</td>
     </tr>
     <tr>
@@ -92,7 +92,7 @@ The cost is fairly predictable because warehouse concept let's you tune in betwe
 
 On the flip side, you pay for the warehouse during auto-suspend and your queries suffer 1-2 seconds of latency for the auto-start. Even if you run a query takes takes 5 seconds to run, you pay for a warehouse 60 seconds at minimum so you often need to optimize your warehouse as you scale. This work is non-trivial if you're not familiar with Snowflake and there are even startups (Select.dev, Keebola etc.) that help you optimize your warehouse usage. 
 
-Snowflake charges based on credits, which costs [$2]() today. (2024-09) You can scale in or out (multi-clusters), by giving you the flexibility to tune your workload. Here are Snowflake [warehouse types](https://docs.snowflake.com/en/user-guide/warehouses-overview#warehouse-size):
+Snowflake charges based on credits, which costs $2 today. (2024-09) You can scale in or out (multi-clusters), by giving you the flexibility to tune your workload. Here are Snowflake [warehouse types](https://docs.snowflake.com/en/user-guide/warehouses-overview#warehouse-size):
 
 Snowflake has [Streams](https://docs.snowflake.com/en/user-guide/streams-intro) and [Tasks](https://docs.snowflake.com/en/user-guide/tasks-intro), which let you create workflows based on event and time-based triggers. For incremental processing, you have these options:
 
@@ -153,8 +153,7 @@ Each query consumes the capacity defined for the project you have the reservatio
 ### So What?
 
 The pricing, storage is not much of a difference between the data warehouses. The compute cost is the most expensive part of the data warehouses. 
-The performance of the queries highly varies based on the workloads and where the data is. 
-It's usually best to do discovery with all these solutions and pick the tech that your team thinks is the best.
+The performance of the queries highly varies based on the workloads and where the data is so it's usually best to do discovery with all these solutions and pick the tech that your team thinks is the best.
 
 Next up, we are:
 
