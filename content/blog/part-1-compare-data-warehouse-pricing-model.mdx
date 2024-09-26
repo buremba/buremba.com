@@ -45,8 +45,8 @@ Decoupling storage from compute is important because unless you have an anti-pat
     </tr>
     <tr>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[AWS Athena](/blog/part-1-compare-data-warehouse-pricing-model/#aws-athena)</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">-</td>
-      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Data scanned]() ($5) </td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[DPU](https://aws.amazon.com/athena/pricing/#SQL_queries_with_Provisioned_Capacity) ($3.6 / hour)</td>
+      <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[Data scanned](https://aws.amazon.com/athena/pricing/) ($5) </td>
     </tr>
     <tr>
       <td class="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">[AWS Redshift Serverless](/blog/part-1-compare-data-warehouse-pricing-model/#aws-redshift-serverless)</td>
@@ -118,6 +118,9 @@ While it's serverless, Redshift charges you a minimum of 60 seconds when you sta
 
 ## AWS Athena
 
+AWS Athena is a Headless Data Warehouse, using Glue as Data Catalog and S3 as the data lake. 
+It charges you based on the data scanned for the query by default but you can use provisioned capacity to manage the workloads in a serverless way. The minimum cost is [$3.6](https://aws.amazon.com/athena/pricing/#SQL_queries_with_Provisioned_Capacity) per DPU per hour.
+
 ## Databricks
 
 Databricks uses the BYOC (Bring-your-cloud) model. 
@@ -150,7 +153,9 @@ It's also worth that BigQuery is the only warehouse that supports both TBs scann
 
 ### So What?
 
-The pricing for data
+The pricing, storage is not much of a difference between the data warehouses. The compute cost is the most expensive part of the data warehouses. 
+The performance of the queries highly varies based on the workloads. 
+
 
 Next up, we are:
 
