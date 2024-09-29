@@ -20,7 +20,7 @@ export function Feedback({ post }: Props) {
   return (
     <div className="mt-32 full-width-container bg-back-secondary">
       <div className="container max-w-xl px-16 p-16 mx-auto">
-        Would you like to comment? Reach me out <ExtLink link="https://twitter.com/bu7emba">@bu7emba</ExtLink>!
+        Would you like to connect? <ExtLink link="https://twitter.com/bu7emba">@bu7emba</ExtLink>
       </div>
     </div>
   )
