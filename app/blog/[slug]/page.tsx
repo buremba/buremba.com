@@ -46,7 +46,7 @@ export default async function BlogPost({ params }) {
     <Fragment>
       <div
         className={classNames(
-          'relative flex justify-between mt-12 mb-12' + (frontmatter.toc ? ' xl:-mr-52' : ''),
+          'page-content relative flex justify-between mt-12 mb-12' + (frontmatter.toc ? ' xl:-mr-52' : ''),
           {
             'flex-row-reverse': Boolean(frontmatter.toc),
           }

@@ -118,6 +118,6 @@ span[aria-label='keycap: 1'] {
   margin-left: 2px;
 }
 
-a {
+.page-content a {
   text-decoration: underline
 }
