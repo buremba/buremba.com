@@ -117,3 +117,7 @@ span[aria-label='keycap: 1'] {
   zoom: 1.5;
   margin-left: 2px;
 }
+
+a {
+  text-decoration: underline
+}
